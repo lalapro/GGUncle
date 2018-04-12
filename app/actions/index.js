@@ -1,7 +1,7 @@
-import menuUpdate from './menuUpdate';
+import updateCurrentCategory from './updateCurrentCategory';
 import getAllCategories from './getAllCategories';
 
 export default allActions = {
-  menuUpdate,
+  updateCurrentCategory,
   getAllCategories
 }

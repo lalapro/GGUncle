@@ -9,7 +9,7 @@ import Card from '../components/Card';
 
 
 
-const MAINS = database.menuItems.child('digestData').child('mains');
+const MAINSREF = database.menuItems.child('digestData').child('mains');
 // const CATEGORIES = database.menuItems.child('digestData').child('categories');
 
 class Home extends React.Component {
@@ -21,7 +21,12 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.props.updateCategories('test');
+    this.props.getAllCategories();
+  }
+
+  chooseCategory(id) {
+    this.props.updateCurrentCategory(id);
+
   }
 
   goBack() {
@@ -29,6 +34,7 @@ class Home extends React.Component {
   }
 
   render() {
+    let categories = this.props.allCategories ? Object.values(this.props.allCategories) : [];
     return (
       <View style={styles.container}>
         <View style={styles.searchBar}>
@@ -47,11 +53,13 @@ class Home extends React.Component {
             contentContainerStyle={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: "100%"}}
           >
             <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center'}}>
-              {this.state.categories.map((cat, i) => {
-                if (cat.mains) {
-                  return ( <Card key={cat.name} category={cat}/> )
-                }
-              })}
+              {categories.map((cat, i) => (
+                <Card
+                  category={cat}
+                  chooseCategory={this.chooseCategory.bind(this)}
+                  key={cat.name}
+                />
+              ))}
             </View>
           </ScrollView>
         </View>
@@ -61,13 +69,14 @@ class Home extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateMenu: (menu) => dispatch(actions.menuUpdate(menu)),
-  updateCategories: (categories) => dispatch(actions.getAllCategories(categories))
+  updateCurrentCategory: (id) => dispatch(actions.updateCurrentCategory(id)),
+  getAllCategories: (categories) => dispatch(actions.getAllCategories(categories))
 })
 
 export default connect((store)=>{
-  console.log(store)
-  return {}
+  return {
+    allCategories: store.allCategories.categories
+  }
   }, mapDispatchToProps)(Home)
 
 const styles = StyleSheet.create({

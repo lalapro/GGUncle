@@ -1,21 +1,25 @@
-import axios from 'axios';
 import { database } from '../app/firebase';
 
 
 export default updateMenu = () => {
-  axios.get("https://s3.amazonaws.com/staginggooduncledigests/products_istcki0x000h28d97a9rv9jp.json")
-  .then((res) => {
-    database.menuItems.set(res.data)
-
-    // res.data.digestData.categories.forEach(cat => {
-    //   for (let i = 0; i < res.data.digestData.mains.length; i++) {
-    //     if (res.data.digestData.mains[i].categories[0] === cat.id) {
-    //       console.log('found')
-    //       cat['mains'] ? cat['mains'].push(res.data.digestData.mains[i]) : cat['mains'] = [res.data.digestData.mains[i]]
-    //     }
-    //   }
-    //
-    // })
-    // database.test.set(res.data)
+  fetch("https://s3.amazonaws.com/staginggooduncledigests/products_istcki0x000h28d97a9rv9jp.json")
+  .then(response => response.json())
+  .then(data => {
+    let categories = data.digestData.categories;
+    categories.forEach(cat => {
+      let mains = data.digestData.mains;
+      for (let i = 0; i < mains.length; i++) {
+        if (mains[i].categories[0] === cat.id) { // assume only one category per main, but can change
+          cat['mains'] ? cat['mains'].push(mains[i]) : cat['mains'] = [mains[i]]
+        }
+      }
+    })
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i].mains === undefined) {
+        categories.splice(i, 1);
+        i--;
+      }
+    }
+    database.menuItems.set(data);
   })
 }

@@ -1,8 +1,8 @@
-export default getAllCategories = (state = {}, action) => {
+export default getAllCategories = (store = {}, action) => {
   switch(action.type) {
     case 'ALL_CATEGORIES':
       return action
     default:
-      return state;
+      return store;
   }
 };

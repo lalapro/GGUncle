@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import menuUpdate from './menuUpdate';
+import currentCategory from './updateCurrentCategory';
 import allCategories from './getAllCategories';
 
 export default rootReducer = combineReducers({
-  menuUpdate,
+  currentCategory,
   allCategories
 })
