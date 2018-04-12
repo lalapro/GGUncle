@@ -1,15 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import reduce from './app/reducers';
+
+import RootNavigator from './app/screens/RootNavigator'
+
+const loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware,
+      loggerMiddleware,
+    ),
+  );
+  return createStore(reduce, initialState, enhancer);
+}
+
+const store = configureStore({});
+
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+      <Provider store={store}>
+        <RootNavigator/>
+      </Provider>
+    )
   }
 }
 
