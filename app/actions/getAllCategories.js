@@ -19,7 +19,7 @@ async function filterCategories() {
 function actionCreator(categories) {
   return {
     type: 'ALL_CATEGORIES',
-    categories
+    payload: categories
   };
 }
 

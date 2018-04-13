@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
-import { database } from '../firebase';
-import { connect } from 'react-redux';
-import actions from '../actions';
+
 
 
 const { width, height } = Dimensions.get("window");
@@ -10,12 +8,12 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 6;
 const CARD_WIDTH = width / 2 - 20;
 
-export default class Card extends React.Component {
+export default class CategoryCard extends React.Component {
   render() {
     let category = this.props.category;
     return (
-      <View style={styles.card}>
-        <TouchableOpacity style={styles.card} onPress={() => this.props.chooseCategory(category.id)}>
+      <View style={styles.categoryCard}>
+        <TouchableOpacity style={styles.categoryCard} onPress={() => this.props.clickHandler(category.id, category.name)}>
           <Image
             style={styles.cardImage}
             resizeMode="cover"
@@ -39,13 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  card: {
+  categoryCard: {
     padding: 3,
-    // elevation: 2,
-    // backgroundColor: "#FFF",
-    // margin: 5,
-    // borderColor: 'black',
-    // borderWidth: 5,
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     justifyContent: 'center',

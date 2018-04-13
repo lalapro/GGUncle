@@ -5,6 +5,7 @@ const CATSREF = database.menuItems.child('digestData').child('categories')
 
 
 async function getRelatedMains(id) {
+  let CURRENTCATEGORY = {};
   let mains = [];
   let categories = await CATSREF.once('value', snap => {
     if (snap.val()) {
@@ -12,27 +13,30 @@ async function getRelatedMains(id) {
       for (let i = 0; i < allCategories.length; i++) {
         let category = allCategories[i];
         if (category.id === id) {
-          mains = category.mains;
+          CURRENTCATEGORY["id"] = category.id;
+          CURRENTCATEGORY["name"] = category.name;
+          CURRENTCATEGORY["mains"] = category.mains;
           break;
         }
       }
     }
   });
-  return mains;
+
+  return CURRENTCATEGORY;
 }
 
 
-function actionCreator(mains) {
+function actionCreator(currentCategory) {
   return {
     type: 'UPDATE_CURRENT_CATEGORY',
-    mains
+    payload: currentCategory
   };
 }
 
 export default updateCurrentCategory = (id) => {
   return function (dispatch, getState) {
     return getRelatedMains(id).then(
-      mains => dispatch(actionCreator(mains))
+      currentCategory => dispatch(actionCreator(currentCategory))
     );
   };
 };

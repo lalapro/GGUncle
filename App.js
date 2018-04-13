@@ -6,7 +6,8 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reduce from './app/reducers';
 
-import RootNavigator from './app/screens/RootNavigator'
+import RootNavigator from './app/navigators/RootNavigator';
+
 
 const loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
 
