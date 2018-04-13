@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'rea
 
 import CategoryCard from './CategoryCard';
 import MenuCard from './MenuCard';
-import ItemCard from './ItemCard';
-
-// import { CategoryCard, ItemCard } from '../components'
+import ItemPage from './ItemPage';
+import CartButton from './CartButton';
+// import { CategoryCard, ItemPage } from '../components'
 
 
 
@@ -39,40 +39,27 @@ export default class ScrollableContent extends React.Component {
   }
 
   render() {
-    // console.log(this.props.item);
     return (
-      this.props.cards ? (
-        <View style={styles.content}>
-          <ScrollView
-            style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
-            contentContainerStyle={{justifyContent: 'center', alignItems: 'center', width: "100%"}}
-          >
-            <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center'}}>
-              {this.props.cards.map((card, i) => this.cardToRender(this.props.cardStyle, card))}
-            </View>
-          </ScrollView>
-        </View>
-      ) : (
-        <View style={styles.content}>
-          <View style={{position: 'absolute', bottom: 0, zIndex: 2}}>
-            <Text style={styles.text}>
-              {this.convertPrice(this.props.item.productOptions[0].price)}
-            </Text>
-          </View>
-          <ScrollView
-            style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
-            contentContainerStyle={{justifyContent: 'center', alignItems: 'center', width: "100%"}}
-          >
-            <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center'}}>
-              <ItemCard
+      <View style={styles.content}>
+        <ScrollView
+          style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
+          contentContainerStyle={{justifyContent: 'center', alignItems: 'center', width: "100%"}}
+        >
+          <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center'}}>
+            {this.props.cards ? (
+              this.props.cards.map((card, i) => this.cardToRender(this.props.cardStyle, card))
+            ) : (
+              <ItemPage
                 item={this.props.item}
-                clickHandler={this.props.clickHandler}
+                touchHandler={this.props.touchHandler}
+                allDrinks={this.props.allDrinks}
+                allSides={this.props.allSides}
                 key={this.props.item.id}
               />
-            </View>
-          </ScrollView>
-        </View>
-      )
+            )}
+          </View>
+        </ScrollView>
+      </View>
     )
   }
 }

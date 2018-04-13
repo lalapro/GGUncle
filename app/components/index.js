@@ -1,8 +1,10 @@
 import Banner from './Banner';
 import CategoryCard from './CategoryCard';
 import MenuCard from './MenuCard';
-import ItemCard from './ItemCard';
+import ItemPage from './ItemPage';
 import ScrollableContent from './ScrollableContent';
+import CartButton from './CartButton';
+import RelatedItemCard from './RelatedItemCard';
 
 
 
@@ -10,6 +12,8 @@ module.exports = {
   Banner,
   CategoryCard,
   MenuCard,
-  ItemCard,
-  ScrollableContent
+  ItemPage,
+  CartButton,
+  ScrollableContent,
+  RelatedItemCard
 };

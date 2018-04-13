@@ -1,20 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Modal } from 'react-native';
 import { database } from '../firebase';
 import { connect } from 'react-redux';
 import actions from '../actions';
 
 
 import { Banner, ScrollableContent } from '../components';
+import ItemScreen from './ItemScreen';
 
 
 class Menu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemSelected: false
+    }
+  }
+
   chooseItem(item) {
-    this.props.navigation.navigate('Item', {item})
+    if (this.props.currentItem.id !== item.id) {
+      this.props.updateCurrentItem(item);
+      this.props.updateSelection({items: {}, totalPrice: 0});
+    }
+    this.setState({ itemSelected:true });
+  }
+
+  close() {
+    this.setState({ itemSelected:false })
   }
 
   componentDidMount() {
-    // console.log(this.props.currentCategory.mains, 'store in menu')
+    // setTimeout(() => {console.log('drinks...', this.props.drinks, 'oyoyoyo')}, 1000)
   }
 
   render() {
@@ -23,12 +39,19 @@ class Menu extends React.Component {
     let navigation = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Banner title={category} navigation={navigation} screen={"Home"}/>
+        <Banner title={category} navigation={navigation}/>
         <ScrollableContent
           cards={mains}
           cardStyle="Menu"
           clickHandler={this.chooseItem.bind(this)}
         />
+        <Modal
+          visible={this.state.itemSelected}
+          animationType="slide"
+          transparent={false}
+        >
+          <ItemScreen close={this.close.bind(this)}/>
+        </Modal>
       </View>
     )
   }
@@ -38,12 +61,15 @@ class Menu extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  updateMenu: (menu) => dispatch(actions.menuUpdate(menu))
+  updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
+  updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
 })
 
 export default connect((store) => {
   return {
-    currentCategory: store.currentCategory
+    currentCategory: store.currentCategory,
+    drinks: store.drinks,
+    currentItem: store.currentItem
   }
 }, mapDispatchToProps)(Menu)
 

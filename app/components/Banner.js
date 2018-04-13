@@ -6,8 +6,7 @@ const { width, height } = Dimensions.get("window");
 export default class ScrollableContent extends React.Component {
 
   goBack() {
-    console.log(this.props.navigation);
-    this.props.navigation.navigate(this.props.screen);
+    this.props.navigation.goBack();
   }
 
   render() {

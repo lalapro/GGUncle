@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   text: {
-    color: 'black'
+    color: 'black',
+    textAlign: 'center'
   }
 });

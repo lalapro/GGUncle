@@ -26,8 +26,10 @@ class Home extends React.Component {
   }
 
   chooseCategory(id, category) {
+    this.props.updateSides();
+    this.props.updateDrinks();
     this.props.updateCurrentCategory(id)
-    .then(mains => this.props.navigation.navigate('Menu', {mains, category}));
+    .then(mains => this.props.navigation.navigate('Menu'));
 
   }
 
@@ -51,7 +53,9 @@ class Home extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   updateCurrentCategory: (id) => dispatch(actions.updateCurrentCategory(id)),
-  getAllCategories: (categories) => dispatch(actions.getAllCategories(categories))
+  getAllCategories: (categories) => dispatch(actions.getAllCategories(categories)),
+  updateSides: () => dispatch(actions.updateSides()),
+  updateDrinks: () => dispatch(actions.updateDrinks())
 })
 
 export default connect((store)=>{

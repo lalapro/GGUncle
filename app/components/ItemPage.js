@@ -1,25 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 
+import { convertPrice, limitCharacters } from '../helpers';
+
+import RelatedItemCard from './RelatedItemCard';
+
 const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 5;
 const CARD_WIDTH = width / 2;
 
 
-export default class ItemCard extends React.Component {
-
-  convertPrice(price) {
-    price = price.toString().split('');
-    price.splice(price.length - 2, 0, '.');
-    price.unshift('$');
-    return price.join('');
-  }
+export default class ItemPage extends React.Component {
 
   render() {
-    let item = this.props.item;
-    let description = this.props.item.description;
-    // console.log(this.props.)
+    const { name, description, sides, drinks } = this.props.item;
+    const { allDrinks, allSides, touchHandler } = this.props;
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'lightgreen'}}>
         <Image
@@ -28,17 +24,13 @@ export default class ItemCard extends React.Component {
           source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
         />
         <Text style={styles.text}>
-          {item.name}
+          {name}
         </Text>
         <Text style={[styles.text, {fontSize: 15}]}>
-          {item.description}
+          {limitCharacters(description)}
         </Text>
-        <Text style={[styles.text, {fontSize: 15}]}>
-          {item.description}
-        </Text>
-        <Text style={[styles.text, {fontSize: 15}]}>
-          {item.description}
-        </Text>
+        <RelatedItemCard title={"Sides"} items={sides.order} itemKey={allSides} touchHandler={touchHandler}/>
+        <RelatedItemCard title={"Drinks"} items={drinks.order} itemKey={allDrinks} touchHandler={touchHandler}/>
       </View>
     )
   }
@@ -56,5 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: 'black',
     flexWrap: 'wrap',
+    textAlign: 'center',
+    margin: 5
   }
 });
