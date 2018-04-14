@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { database } from '../firebase';
+import { database } from '../../firebase';
 import { connect } from 'react-redux';
-import actions from '../actions';
-import fakeData from './fakeData';
+import actions from '../../actions';
+import fakeData from '../fakeData';
 
-
-import { Banner, CategoryCard, ScrollableContent } from '../components';
+import { Banner, CategoryCard, ScrollablePage } from '../../components';
 
 
 
@@ -41,7 +40,7 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Banner title={"All Categories"}/>
-        <ScrollableContent
+        <ScrollablePage
           cards={this.state.categories}
           cardStyle="Category"
           clickHandler={this.chooseCategory.bind(this)}
@@ -70,12 +69,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  banner: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: "100%",
-    backgroundColor: 'black'
   }
 });

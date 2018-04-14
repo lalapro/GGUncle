@@ -1,10 +1,6 @@
-import Banner from './Banner';
-import CategoryCard from './CategoryCard';
-import MenuCard from './MenuCard';
-import ItemPage from './ItemPage';
-import ScrollableContent from './ScrollableContent';
-import CartButton from './CartButton';
-import RelatedItemCard from './RelatedItemCard';
+import { Banner, CategoryCard, MenuCard, RelatedItemCard } from './cards';
+import { ItemPage, ScrollablePage } from './pages';
+import { CartButton } from './buttons';
 
 
 
@@ -12,8 +8,8 @@ module.exports = {
   Banner,
   CategoryCard,
   MenuCard,
+  RelatedItemCard,
   ItemPage,
   CartButton,
-  ScrollableContent,
-  RelatedItemCard
+  ScrollablePage,
 };

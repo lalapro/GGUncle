@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   menuImage: {
     width: "100%",

@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
-import { database } from '../firebase';
+import { database } from '../../firebase';
 import { connect } from 'react-redux';
-import actions from '../actions';
+import actions from '../../actions';
 
-import { Banner, ScrollableContent, CartButton } from '../components';
+import { Banner, ScrollablePage, CartButton, ItemPage } from '../../components';
 
 const { width, height } = Dimensions.get("window");
 
@@ -12,7 +12,7 @@ class Item extends React.Component {
 
   addToCart(selection) {
     let cart = this.props.cart;
-    let totalPrice = 0;
+    let totalPrice = cart.totalPrice;
 
     if (selection.items) {
       for (let itemId in selection.items) {
@@ -28,10 +28,12 @@ class Item extends React.Component {
     }
     cart.totalPrice = totalPrice;
     this.props.updateCart(cart);
+    console.log(this.props.cart);
   }
 
 
   updateCurrentSelection(itemId, itemObj) {
+    // eventbus running in the back
     let selection = this.props.selection;
     if (selection.items[itemId] === undefined) {
       itemObj['quantity'] = 1;
@@ -50,6 +52,7 @@ class Item extends React.Component {
 
   test() {
     console.log('yo')
+    /*TODO pagination*/
   }
 
   render() {
@@ -58,18 +61,25 @@ class Item extends React.Component {
 
     return (
       <View style={styles.container}>
-          <Image
-            onTouchEnd={() => {this.props.close()}}
-            source={require('../assets/exit.png')}
-            resizeMode="contain"
-            style={{width: 40, height: 40, left: 15, top: 60, position: 'absolute', zIndex: 4}}
-          />
+        <Image
+          onTouchEnd={() => {this.props.close()}}
+          source={require('../../assets/exit.png')}
+          resizeMode="contain"
+          style={{width: 40, height: 40, left: 15, top: 60, position: 'absolute', zIndex: 4}}
+        />
         <Banner title={item.name}/>
-        <ScrollableContent
-          item={item}
+        <ItemPage item={item} allSides={sides} allDrinks={drinks}/>
+        <Text style={[styles.text, {fontSize: 20, fontWeight: 'bold', textAlign: 'left'}]}>
+          Sides
+        </Text>
+        <ScrollablePage
+          cards={item.sides.order}
           allSides={sides}
           allDrinks={drinks}
-          cardStyle="Item"
+          cardStyle="RelatedItem"
+          title="Sides"
+          flex={3}
+          direction="column"
           touchHandler={this.updateCurrentSelection.bind(this)}
         />
         <CartButton price={selection.totalPrice} touchHandler={this.addToCart.bind(this)} selection={selection}/>

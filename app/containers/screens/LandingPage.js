@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { database } from '../firebase';
+import { database } from '../../firebase';
 import { connect } from 'react-redux';
-import actions from '../actions';
-import test from '../../microservice/updateMenu.js'
+import actions from '../../actions';
+import test from '../../../microservice/updateMenu.js'
 
 class LandingPage extends React.Component {
 

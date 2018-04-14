@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal } from 'react-native';
-import { database } from '../firebase';
+import { database } from '../../firebase';
 import { connect } from 'react-redux';
-import actions from '../actions';
+import actions from '../../actions';
 
 
-import { Banner, ScrollableContent } from '../components';
-import ItemScreen from './ItemScreen';
+import { Banner, ScrollablePage } from '../../components';
+import { ItemModal } from '../modals';
 
 
 class Menu extends React.Component {
@@ -40,7 +40,7 @@ class Menu extends React.Component {
     return (
       <View style={styles.container}>
         <Banner title={category} navigation={navigation}/>
-        <ScrollableContent
+        <ScrollablePage
           cards={mains}
           cardStyle="Menu"
           clickHandler={this.chooseItem.bind(this)}
@@ -50,7 +50,7 @@ class Menu extends React.Component {
           animationType="slide"
           transparent={false}
         >
-          <ItemScreen close={this.close.bind(this)}/>
+          <ItemModal close={this.close.bind(this)}/>
         </Modal>
       </View>
     )

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { createNavigator, createNavigationContainer, TabRouter, addNavigationHelpers } from 'react-navigation';
 
 
-import { LandingPage, HomeScreen, MenuScreen, ItemScreen, CartScreen } from '../screens';
+import { LandingPage, HomeScreen, MenuScreen, CartScreen } from '../containers';
 
 
 
@@ -71,10 +71,6 @@ const CustomTabRouter = TabRouter(
     Menu: {
       screen: MenuScreen,
       path: 'Menu',
-    },
-    Item: {
-      screen: ItemScreen,
-      path: 'Item'
     },
     Cart: {
       screen: CartScreen,

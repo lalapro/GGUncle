@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 
-import { convertPrice, limitCharacters } from '../helpers';
+import { convertPrice, limitCharacters } from '../../helpers';
 
-import RelatedItemCard from './RelatedItemCard';
+import { RelatedItemCard } from '../cards';
 
 const { width, height } = Dimensions.get("window");
 
@@ -17,7 +17,7 @@ export default class ItemPage extends React.Component {
     const { name, description, sides, drinks } = this.props.item;
     const { allDrinks, allSides, touchHandler } = this.props;
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'lightgreen'}}>
+      <View style={{flex: 5, justifyContent: 'center', alignItems: 'center', backgroundColor:'lightgreen', width: "100%"}}>
         <Image
           style={{width: CARD_WIDTH, height: CARD_HEIGHT, margin: 15}}
           resizeMode="contain"
@@ -29,8 +29,8 @@ export default class ItemPage extends React.Component {
         <Text style={[styles.text, {fontSize: 15}]}>
           {limitCharacters(description)}
         </Text>
-        <RelatedItemCard title={"Sides"} items={sides.order} itemKey={allSides} touchHandler={touchHandler}/>
-        <RelatedItemCard title={"Drinks"} items={drinks.order} itemKey={allDrinks} touchHandler={touchHandler}/>
+        {/* <RelatedItemCard title={"Sides"} items={sides.order} itemKey={allSides} touchHandler={touchHandler}/>
+        <RelatedItemCard title={"Drinks"} items={drinks.order} itemKey={allDrinks} touchHandler={touchHandler}/> */}
       </View>
     )
   }

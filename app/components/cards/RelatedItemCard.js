@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 
-import { convertPrice } from '../helpers';
+import { convertPrice } from '../../helpers';
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,24 +19,19 @@ export default class RelatedItemCard extends React.Component {
   }
 
   render() {
-    const { title, items, itemKey, touchHandler } = this.props;
+    const { title, item, itemKey, touchHandler } = this.props;
     return (
       <View style={styles.menuCard}>
-        <Text style={[styles.text, {fontSize: 20, fontWeight: 'bold', textAlign: 'left'}]}>
-          {title}
-        </Text>
-        {items.map((itemId, i) => (
-          <TouchableOpacity onPress={() => {this.addToCart(itemKey[itemId])}} key={i}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 2}} >
-              <Text style={styles.text}>
-                {itemKey[itemId].name}
-              </Text>
-              <Text style={styles.text}>
-                {convertPrice(itemKey[itemId].price)}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        <TouchableOpacity onPress={() => {this.addToCart(itemKey[item])}}>
+          <View style={{flex: 1}} >
+            <Text style={styles.text}>
+              {itemKey[item].name}
+            </Text>
+            <Text style={styles.text}>
+              {convertPrice(itemKey[item].price)}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 
-import { convertPrice } from '../helpers';
+import { convertPrice } from '../../helpers';
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,11 +10,13 @@ export default class CartButton extends React.Component {
     const { price, touchHandler, selection } = this.props;
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.buttonStyle}
-          onPress={() => touchHandler(selection)}
-        >
-          <Text style={styles.textStyle}>Add To Cart {convertPrice(price)}</Text>
-        </TouchableOpacity>
+        <View stlye={{justifyContent:'space-between'}}>
+          <TouchableOpacity style={styles.buttonStyle}
+            onPress={() => touchHandler(selection)}
+          >
+            <Text style={styles.textStyle}>Add To Cart {convertPrice(price)}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     padding:10,
     backgroundColor: '#202646',
-    borderRadius:5
+    borderRadius:5,
+    minWidth: "80%"
   }
 });

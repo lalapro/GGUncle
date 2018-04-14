@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal } from 'react-native';
-import { database } from '../firebase';
+import { database } from '../../firebase';
 import { connect } from 'react-redux';
-import actions from '../actions';
+import actions from '../../actions';
 
 
-import { Banner, ScrollableContent } from '../components';
-import ItemScreen from './ItemScreen';
+import { Banner, ScrollablePage } from '../../components';
+import { ItemModal } from '../modals';
 
 
 class Cart extends React.Component {
@@ -31,17 +31,17 @@ class Cart extends React.Component {
   }
 
   render() {
-    // let category = this.props.currentCategory.name;
-    // let mains = this.props.currentCategory.mains;
-    let navigation = this.props.navigation;
+    const { navigation, cart } = this.props
+    cart.items = cart.items || [];
     return (
       <View style={styles.container}>
         <Banner title={"Your Cart"} navigation={navigation} screen={"Home"}/>
-        {/* <ScrollableContent
-          // cards={mains}
-          // cardStyle="Menu"
-          // clickHandler={this.chooseItem.bind(this)}
-        /> */}
+        <ItemModal/>
+        <ScrollablePage
+          cards={cart.items}
+          cardStyle="Item"
+          clickHandler={this.chooseItem.bind(this)}
+        />
       </View>
     )
   }
