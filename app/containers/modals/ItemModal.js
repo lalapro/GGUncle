@@ -28,7 +28,8 @@ class Item extends React.Component {
     }
     cart.totalPrice = totalPrice;
     this.props.updateCart(cart);
-    console.log(this.props.cart);
+    this.props.updateSelection({items: {}, totalPrice: 0});
+    this.props.close();
   }
 
 

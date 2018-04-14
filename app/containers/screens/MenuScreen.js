@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import actions from '../../actions';
 
 
-import { Banner, ScrollablePage } from '../../components';
+import { Banner, ScrollablePage, CartAlert } from '../../components';
 import { ItemModal } from '../modals';
 
 
@@ -52,6 +52,7 @@ class Menu extends React.Component {
         >
           <ItemModal close={this.close.bind(this)}/>
         </Modal>
+        <CartAlert/>
       </View>
     )
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { createNavigator, createNavigationContainer, TabRouter, addNavigationHelpers } from 'react-navigation';
+import { connect } from 'react-redux';
+import actions from '../actions';
 
 
 import { LandingPage, HomeScreen, MenuScreen, CartScreen } from '../containers';
@@ -16,6 +18,7 @@ const IMAGES = [
 
 
 const CustomTabView = ({ router, navigation }) => {
+  // console.log(this.props)
   const { routes, index } = navigation.state;
   const ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
   if (routes[index].routeName === 'LandingPage') {
@@ -88,7 +91,17 @@ const CustomTabs = createNavigationContainer(
 );
 
 
-export default CustomTabs;
+const mapDispatchToProps = (dispatch) => ({
+  updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
+  updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
+})
+
+export default connect((store) => {
+  return {
+    cart: store.cart
+  }
+}, mapDispatchToProps)(CustomTabs)
+
 
 
 
