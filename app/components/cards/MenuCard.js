@@ -3,18 +3,13 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'rea
 
 const { width, height } = Dimensions.get("window");
 
+import { convertPrice } from '../../helpers'
+
 const CARD_HEIGHT = height / 6;
 const CARD_WIDTH = width - 50;
 
 
 export default class MenuCard extends React.Component {
-
-  convertPrice(price) {
-    price = price.toString().split('');
-    price.splice(price.length - 2, 0, '.');
-    price.unshift('$');
-    return price.join('');
-  }
 
   render() {
     let menu = this.props.menu;
@@ -36,7 +31,7 @@ export default class MenuCard extends React.Component {
                   {menu.name}
                 </Text>
                 <Text style={styles.text}>
-                  {this.convertPrice(menu.productOptions[0].price)}
+                  {convertPrice(menu.productOptions[0].price)}
                 </Text>
               </View>
             </TouchableOpacity>

@@ -65,7 +65,7 @@ const CustomTabRouter = TabRouter(
   {
     LandingPage: {
       screen: LandingPage,
-      path: 'Landing',
+      path: 'LandingPage',
     },
     Home: {
       screen: HomeScreen,
@@ -81,7 +81,7 @@ const CustomTabRouter = TabRouter(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'LandingPage',
   }
 );
 

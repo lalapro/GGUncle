@@ -37,6 +37,7 @@ class Menu extends React.Component {
     let category = this.props.currentCategory.name;
     let mains = this.props.currentCategory.mains;
     let navigation = this.props.navigation;
+    let { cart } = this.props;
     return (
       <View style={styles.container}>
         <Banner title={category} navigation={navigation}/>
@@ -52,7 +53,9 @@ class Menu extends React.Component {
         >
           <ItemModal close={this.close.bind(this)}/>
         </Modal>
-        <CartAlert/>
+        {cart.totalPrice > 0 ? (
+          <CartAlert cart={cart} navigation={navigation}/>
+        ) : (null)}
       </View>
     )
   }
@@ -70,7 +73,8 @@ export default connect((store) => {
   return {
     currentCategory: store.currentCategory,
     drinks: store.drinks,
-    currentItem: store.currentItem
+    currentItem: store.currentItem,
+    cart: store.cart
   }
 }, mapDispatchToProps)(Menu)
 

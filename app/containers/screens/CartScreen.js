@@ -5,43 +5,25 @@ import { connect } from 'react-redux';
 import actions from '../../actions';
 
 
-import { Banner, ScrollablePage } from '../../components';
+import { Banner, ScrollablePage, SubTotalPage } from '../../components';
 import { ItemModal } from '../modals';
 
 
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      itemSelected: false
-    }
-  }
-
-  chooseItem(item) {
-    this.props.updateCurrentItem(item)
-    this.setState({ itemSelected:true });
-  }
-
-  close() {
-    this.setState({ itemSelected:false })
-  }
-
-  componentDidMount() {
-    // console.log(this.props.currentCategory.mains, 'store in menu')
-  }
 
   render() {
-    const { navigation, cart } = this.props
-    cart.items = cart.items || [];
+    const { navigation, cart } = this.props;
+    cart.items = Object.values(cart.items) || [];
     return (
       <View style={styles.container}>
         <Banner title={"Your Cart"} navigation={navigation} screen={"Home"}/>
-        <ItemModal/>
         <ScrollablePage
           cards={cart.items}
-          cardStyle="Item"
-          clickHandler={this.chooseItem.bind(this)}
+          cardStyle="Cart"
+          flex={4}
+          // clickHandler={this.chooseItem.bind(this)}
         />
+        <SubTotalPage/>
       </View>
     )
   }

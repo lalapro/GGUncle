@@ -1,5 +1,5 @@
 import { Banner, CategoryCard, MenuCard, RelatedItemCard } from './cards';
-import { ItemPage, ScrollablePage } from './pages';
+import { ItemPage, ScrollablePage, SubTotalPage } from './pages';
 import { CartButton, CartAlert } from './buttons';
 
 
@@ -12,5 +12,6 @@ module.exports = {
   ItemPage,
   CartButton,
   ScrollablePage,
+  SubTotalPage,
   CartAlert
 };

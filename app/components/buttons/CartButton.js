@@ -10,7 +10,7 @@ export default class CartButton extends React.Component {
     const { price, touchHandler, selection } = this.props;
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <View stlye={{justifyContent:'space-between'}}>
+        <View style={{justifyContent:'space-between'}}>
           <TouchableOpacity style={styles.buttonStyle}
             onPress={() => touchHandler(selection)}
           >

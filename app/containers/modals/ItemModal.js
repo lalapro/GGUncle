@@ -6,48 +6,25 @@ import actions from '../../actions';
 
 import { Banner, ScrollablePage, CartButton, ItemPage } from '../../components';
 
+import { addToCart, modifySelection } from '../../helpers';
+
 const { width, height } = Dimensions.get("window");
 
 class Item extends React.Component {
 
-  addToCart(selection) {
+  updateCart(selection) {
     let cart = this.props.cart;
-    let totalPrice = cart.totalPrice;
-
-    if (selection.items) {
-      for (let itemId in selection.items) {
-        if (cart.items[itemId] === undefined) {
-          cart.items[itemId] = selection.items[itemId];
-          totalPrice += selection.items[itemId].price;
-        } else {
-          let price = selection.items[itemId].price;
-          cart.items[itemId].price += price;
-          totalPrice += price;
-        }
-      }
-    }
-    cart.totalPrice = totalPrice;
+    cart = addToCart(selection, cart);
     this.props.updateCart(cart);
     this.props.updateSelection({items: {}, totalPrice: 0});
     this.props.close();
   }
 
 
-  updateCurrentSelection(itemId, itemObj) {
-    // eventbus running in the back
+  updateCurrentSelection(itemId, itemObj, method) {
     let selection = this.props.selection;
-    if (selection.items[itemId] === undefined) {
-      itemObj['quantity'] = 1;
-      selection.items[itemId] = itemObj;
-      selection.totalPrice += itemObj.price;
-    } else {
-      let price = selection.items[itemId].price;
-      selection.items[itemId].quantity++;
-      selection.items[itemId].price += price;
-      selection.totalPrice += price;
-    }
+    selection = modifySelection(itemId, itemObj, method, selection);
     this.props.updateSelection(selection);
-
   }
 
 
@@ -59,7 +36,7 @@ class Item extends React.Component {
   render() {
     const item = this.props.currentItem;
     const { navigation, sides, drinks, cart, selection } = this.props;
-
+    // console.log(item)
     return (
       <View style={styles.container}>
         <Image
@@ -69,7 +46,12 @@ class Item extends React.Component {
           style={{width: 40, height: 40, left: 15, top: 60, position: 'absolute', zIndex: 4}}
         />
         <Banner title={item.name}/>
-        <ItemPage item={item} allSides={sides} allDrinks={drinks}/>
+        <ItemPage
+          item={item}
+          allSides={sides}
+          allDrinks={drinks}
+          selection={selection}
+          touchHandler={this.updateCurrentSelection.bind(this)}/>
         <Text style={[styles.text, {fontSize: 20, fontWeight: 'bold', textAlign: 'left'}]}>
           Sides
         </Text>
@@ -81,9 +63,10 @@ class Item extends React.Component {
           title="Sides"
           flex={3}
           direction="column"
+          selection={selection}
           touchHandler={this.updateCurrentSelection.bind(this)}
         />
-        <CartButton price={selection.totalPrice} touchHandler={this.addToCart.bind(this)} selection={selection}/>
+        <CartButton price={selection.totalPrice} touchHandler={this.updateCart.bind(this)} selection={selection}/>
       </View>
     )
   }

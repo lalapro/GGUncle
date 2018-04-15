@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import actions from '../../actions';
 import fakeData from '../fakeData';
 
-import { Banner, CategoryCard, ScrollablePage } from '../../components';
+import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../components';
 
 
 
@@ -37,6 +37,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { cart, navigation } = this.props;
     return (
       <View style={styles.container}>
         <Banner title={"All Categories"}/>
@@ -45,6 +46,9 @@ class Home extends React.Component {
           cardStyle="Category"
           clickHandler={this.chooseCategory.bind(this)}
         />
+        {cart.totalPrice > 0 ? (
+          <CartAlert cart={cart} navigation={navigation}/>
+        ) : (null)}
       </View>
     )
   }
@@ -59,7 +63,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect((store)=>{
   return {
-    allCategories: store.allCategories
+    allCategories: store.allCategories,
+    cart: store.cart
   }
   }, mapDispatchToProps)(Home)
 

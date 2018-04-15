@@ -1,21 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 
-import { CategoryCard, MenuCard, RelatedItemCard } from '../cards';
+import { CategoryCard, MenuCard, RelatedItemCard, CartCard } from '../cards';
 import ItemPage from './ItemPage'
 import { CartButton } from '../buttons';
 
 
 
 export default class ScrollablePage extends React.Component {
-
-  convertPrice(price) {
-    price = price.toString().split('');
-    price.splice(price.length - 2, 0, '.');
-    price.unshift('$');
-    return price.join('');
-  }
-
   cardToRender(cardStyle, card) {
     if (cardStyle === 'Category') {
       return (
@@ -38,9 +30,17 @@ export default class ScrollablePage extends React.Component {
         <RelatedItemCard
           title={this.props.title}
           item={card}
+          selection={this.props.selection}
           itemKey={this.props.allSides}
           touchHandler={this.props.touchHandler}
           key={card}
+        />
+      )
+    } else if (cardStyle === 'Cart') {
+      return (
+        <CartCard
+          item={card}
+          key={card.name}
         />
       )
     }

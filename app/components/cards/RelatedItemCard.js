@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 
 import { convertPrice } from '../../helpers';
+import { QuantityControl } from '../buttons';
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,28 +11,35 @@ const CARD_WIDTH = width - 50;
 
 export default class RelatedItemCard extends React.Component {
 
-  addToCart(item) {
+  updateSelection(item, method) {
+    console.log(item)
     let obj = {
       name: item.name,
       price: item.price,
     }
-    this.props.touchHandler(item.id, obj);
+    this.props.touchHandler(item.id, obj, method);
   }
 
   render() {
-    const { title, item, itemKey, touchHandler } = this.props;
+    const { title, item, itemKey, touchHandler, selection } = this.props;
     return (
       <View style={styles.menuCard}>
-        <TouchableOpacity onPress={() => {this.addToCart(itemKey[item])}}>
-          <View style={{flex: 1}} >
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'lightblue', width: '85%'}} >
+          <View style={{flex: 3, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Text style={styles.text}>
               {itemKey[item].name}
             </Text>
-            <Text style={styles.text}>
-              {convertPrice(itemKey[item].price)}
+            <Text style={[styles.text, {fontSize: 14}]}>
+              ({convertPrice(itemKey[item].price)})
             </Text>
           </View>
-        </TouchableOpacity>
+          <QuantityControl
+            id={item}
+            item={itemKey[item]}
+            selection={selection}
+            touchHandler={this.updateSelection.bind(this)}
+          />
+        </View>
       </View>
     )
   }

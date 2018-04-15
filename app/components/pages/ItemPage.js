@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'rea
 import { convertPrice, limitCharacters } from '../../helpers';
 
 import { RelatedItemCard } from '../cards';
+import { QuantityControl } from '../buttons';
 
 const { width, height } = Dimensions.get("window");
 
@@ -13,9 +14,18 @@ const CARD_WIDTH = width / 2;
 
 export default class ItemPage extends React.Component {
 
+  updateSelection(item, method) {
+    item.price = item.price || item.productOptions[0].price;
+    let obj = {
+      name: item.name,
+      price: item.price,
+    }
+    this.props.touchHandler(item.id, obj, method);
+  }
+
   render() {
     const { name, description, sides, drinks } = this.props.item;
-    const { allDrinks, allSides, touchHandler } = this.props;
+    const { allDrinks, allSides, touchHandler, item, selection } = this.props;
     return (
       <View style={{flex: 5, justifyContent: 'center', alignItems: 'center', backgroundColor:'lightgreen', width: "100%"}}>
         <Image
@@ -26,6 +36,11 @@ export default class ItemPage extends React.Component {
         <Text style={styles.text}>
           {name}
         </Text>
+        <QuantityControl
+          item={item}
+          id={item.id}
+          selection={selection}
+          touchHandler={this.updateSelection.bind(this)}/>
         <Text style={[styles.text, {fontSize: 15}]}>
           {limitCharacters(description)}
         </Text>
