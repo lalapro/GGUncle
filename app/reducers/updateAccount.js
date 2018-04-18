@@ -1,4 +1,4 @@
-export default updateCart = (store = {}, action) => {
+let updateAccount = (store = {}, action) => {
   switch(action.type) {
     case 'UPDATE_ACCOUNT':
       return action.payload;
@@ -6,3 +6,5 @@ export default updateCart = (store = {}, action) => {
       return store;
   }
 };
+
+export default updateAccount;
