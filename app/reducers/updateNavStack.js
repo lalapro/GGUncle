@@ -1,4 +1,4 @@
-export default pushToStack = (store = [], action) => {
+let updateNavStack = (store = [], action) => {
   switch(action.type) {
     case 'UPDATE_NAVGIATION_STACK':
       return action.payload;
@@ -6,3 +6,5 @@ export default pushToStack = (store = [], action) => {
       return store;
   }
 };
+
+export default updateNavStack;
