@@ -9,7 +9,7 @@ In terminal, run the following commands.
 
 ## iPhone (XCode must be installed for this command to work)
 
-To run simulator, type in the following in the console:
+To run simulator, type in the following in the terminal:
 `npm run iPhone8` or `npm run iPhone8Plus`
 
 ## Troubleshooting (iPhone)
@@ -22,7 +22,7 @@ To run simulator, type in the following in the console:
 
 ## Android
 1. start up simulator (I used genymotion)
-When simulator is up, type the following in the console:
+When simulator is up, type the following in the terminal:
 `npm run android`
 
 ## Troubleshooting (Android)
