@@ -1,4 +1,4 @@
-export default updateSides = (store = {}, action) => {
+let updateSides = (store = {}, action) => {
   switch(action.type) {
     case 'UPDATE_SIDES':
       return action.payload;
@@ -6,3 +6,5 @@ export default updateSides = (store = {}, action) => {
       return store;
   }
 };
+
+export default updateSides;
