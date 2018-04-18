@@ -13,14 +13,21 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editItem: false
+      editItem: false,
+      tax: 0,
+      grandTotal: 0
     }
   }
 
   componentDidMount() {
     let navStack = this.props.navStack;
+    let cart = this.props.cart;
     navStack.push('Cart');
     this.props.updateNavigationStack(navStack);
+    
+    let tax = Math.round(cart.totalPrice * 0.15);
+    let grandTotal = subTotal + tax + 500;
+    this.setState({tax, grandTotal});
   }
 
   back() {
@@ -42,8 +49,6 @@ class Cart extends React.Component {
   render() {
     let { navigation, cart } = this.props;
     let subTotal = cart.totalPrice;
-    let tax = Math.round(cart.totalPrice * 0.15);
-    let grandTotal = subTotal + tax + 500
     let cartItems = Object.values(cart.items) || [];
     // console.log(cart);
     return (
@@ -62,7 +67,7 @@ class Cart extends React.Component {
             flex={6}
           />
         )}
-        <SubTotalPage subTotal={subTotal} tax={tax} grandTotal={grandTotal}/>
+        <SubTotalPage subTotal={subTotal} tax={this.state.tax} grandTotal={this.state.grandTotal}/>
         <Modal
           isVisible={this.state.editItem}
           animationIn={'slideInUp'}
