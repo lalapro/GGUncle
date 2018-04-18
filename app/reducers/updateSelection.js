@@ -1,4 +1,4 @@
-export default updateSelection = (store = { items: {}, totalPrice: 0}, action) => {
+let updateSelection = (store = { items: {}, totalPrice: 0}, action) => {
   switch(action.type) {
     case 'UPDATE_SELECTION':
       return Object.assign({}, action.payload);
@@ -6,3 +6,5 @@ export default updateSelection = (store = { items: {}, totalPrice: 0}, action) =
       return store;
   }
 };
+
+export default updateSelection;
