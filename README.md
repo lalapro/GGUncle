@@ -3,7 +3,7 @@ In terminal, run the following commands.
 1. `git clone https://github.com/lalapro/GGUncle.git`
 2. `cd GGUncle`
 3. `npm install`
-4. Follow steps for your preferred device/simulator
+4. Follow the steps for your preferred device/simulator
 
 
 
