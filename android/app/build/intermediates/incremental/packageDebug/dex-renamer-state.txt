@@ -1,0 +1,4 @@
+#Wed Apr 18 05:58:29 EDT 2018
+base.0=/Users/admin/GGUncle/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/admin/GGUncle/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

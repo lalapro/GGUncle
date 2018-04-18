@@ -15,7 +15,7 @@ import SignUpNavigator from './SignUpNavigator';
 
 let IMAGES = [
   ['Home', require('../assets/home.png')],
-  ['Search', require('../assets/search.png')],
+  ['Home', require('../assets/search.png')],
   ['Cart', require('../assets/cart.png')],
   ['Account', require('../assets/account.png')]
 ]
@@ -51,7 +51,11 @@ let CustomTabView = ({ router, navigation }) => {
         </View>
         <View style={styles.tabNavigator}>
           {IMAGES.map((img, i) => (
-            <TouchableOpacity onPress={() => {navigation.navigate(img[0])}} key={i}>
+            <TouchableOpacity
+              key={i}
+              style={{height:'100%'}}
+              onPress={() => {navigation.navigate(img[0])}}
+            >
               <Image
                 source={img[1]}
                 resizeMode="contain"
@@ -111,7 +115,7 @@ let styles = StyleSheet.create({
     position: 'relative',
     width: "100%",
     borderTopColor: 'grey',
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
   icons: {
     top: 15,
