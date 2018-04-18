@@ -1,4 +1,4 @@
-export default getAllCategories = (store = {}, action) => {
+let getAllCategories = (store = {}, action) => {
   switch(action.type) {
     case 'ALL_CATEGORIES':
       return action.payload
@@ -6,3 +6,5 @@ export default getAllCategories = (store = {}, action) => {
       return store;
   }
 };
+
+export default getAllCategories;
