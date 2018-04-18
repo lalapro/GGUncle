@@ -49,6 +49,8 @@ class LandingPage extends React.Component {
             if (snap.val() === this.state.password) {
               AsyncStorage.setItem('user', phone)
               this.navigateToHomeScreen(phone);
+            } else {
+              this.setState({notFound: true})
             }
           } else {
             this.setState({notFound: true})
@@ -98,7 +100,7 @@ class LandingPage extends React.Component {
             />
             <TextInput
               style={spStyles.textStyle}
-              placeholder={"Phone Number"}
+              placeholder={"Tap to enter phone number"}
               onChangeText={(phone) => this.setState({phone})}
               value={this.state.phone}
               keyboardType={"phone-pad"}
@@ -117,7 +119,7 @@ class LandingPage extends React.Component {
             />
             <TextInput
               style={spStyles.textStyle}
-              placeholder={"Password"}
+              placeholder={"Tap to enter password"}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}
               autoCapitalize={"none"}
@@ -128,15 +130,14 @@ class LandingPage extends React.Component {
             />
           </TouchableOpacity>
           {this.state.notFound ? (
-            <View style={{width: '100%'}}>
+            <View style={{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
               <Text
                 style={[spStyles.textStyle, {
                   color: 'red',
                   marginBottom: 15,
                   fontSize: 20,
-                  margin: 10
               }]}>
-                Bad Login.
+                Bad Login
               </Text>
             </View>
           ) : (null)}
