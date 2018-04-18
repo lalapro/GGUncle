@@ -26,7 +26,7 @@ class Cart extends React.Component {
     this.props.updateNavigationStack(navStack);
     
     let tax = Math.round(cart.totalPrice * 0.15);
-    let grandTotal = subTotal + tax + 500;
+    let grandTotal = cart.totalPrice + tax + 500;
     this.setState({tax, grandTotal});
   }
 
