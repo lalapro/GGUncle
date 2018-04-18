@@ -13,7 +13,7 @@ In terminal, do the following..
 ## Troubleshooting (iPhone)
 ##### No Bundle Url Present
 
-`Fix` -> keep simulator running, in another terminal instance run npm install again, then run npm run iPhone 8 again
+`Fix` -> keep simulator running, in another terminal instance run `npm install` again, then run `npm run iPhone8` when install is finished
 
 ##### Simulator not showing up even after load successful
 `Fix` -> On Mac, cmd + space and type in simulator, it should show up with the app loaded
