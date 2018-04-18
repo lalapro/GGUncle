@@ -10,13 +10,15 @@
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "iPhone8": "react-native run-ios --simulator 'iPhone 8'",
+    "iPhone8Plus": "react-native run-ios --simulator 'iPhone 8 Plus'",
     "test": "jest"
   },
   "jest": {
     "preset": "react-native"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-react-native": "^2.1.0",
     "firebase": "^4.12.1",
     "jest-enzyme": "^6.0.0",

@@ -8,6 +8,7 @@ var database = {};
 
 database.menuItems = firebase.database().ref('/Syracuse');
 database.users = firebase.database().ref('/Users');
+database.pics = firebase.database().ref('/Pics');
 
 module.exports = {
   fire,

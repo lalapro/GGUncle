@@ -30,7 +30,6 @@ class LandingPage extends React.Component {
   }
 
   async componentDidMount() {
-    updateMenu();
     let phone = await AsyncStorage.getItem('user');
     if (phone) {
       this.navigateToHomeScreen(phone);

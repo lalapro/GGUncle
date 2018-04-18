@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
+import { database } from '../../firebase';
+import axios from 'axios';
 let { width, height } = Dimensions.get("window");
 import { convertPrice } from '../../helpers';
 
@@ -9,6 +10,21 @@ import genericStyles from '../styles';
 
 
 export default class MenuCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pic: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'
+    }
+  }
+  componentDidMount() {
+    database.pics.child(this.props.menu.id).once('value', snap => {
+      if (snap.val()) {
+        this.setState({
+          pic: snap.val()
+        })
+      }
+    })
+  }
 
   render() {
     let menu = this.props.menu;
@@ -21,7 +37,7 @@ export default class MenuCard extends React.Component {
                 <Image
                   style={spStyles.menuImage}
                   resizeMode="cover"
-                  source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
+                  source={{uri: this.state.pic}}
                 />
               </View>
               <View style={[genericStyles.flexContainer, { flex: 2 }]}>
@@ -52,7 +68,7 @@ let spStyles = StyleSheet.create({
   menuImage: {
     width: "100%",
     height: "100%",
-    opacity: 0.8,
+    opacity: 0.9,
     borderRadius:10,
     borderWidth: 1,
     borderColor: 'white',
