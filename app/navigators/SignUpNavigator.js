@@ -119,7 +119,7 @@ class Password extends React.Component {
       <View style={styles.container}>
         <View style={{flex: 1, justifyContent: 'flex-start'}}>
           <Text style={styles.textStyle}>
-            Please Enter Your Password
+            Please Enter a 6-Digit Password
           </Text>
           <TextInput
             style={{
