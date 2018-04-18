@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import genericStyles from './styles.js';
 import { convertPrice } from '../../helpers';
+import TextView from '../TextView';
 
 
 export default class QuantityControl extends React.Component {
@@ -13,7 +13,7 @@ export default class QuantityControl extends React.Component {
         <TouchableOpacity onPress={() => touchHandler(item, 'Remove')}>
           <Text style={spStyles.text}> - </Text>
         </TouchableOpacity>
-        <Text style={{marginLeft: 10, marginRight: 10}}>
+        <Text style={{marginLeft: 5, marginRight: 5}}>
           {quantity}
         </Text>
         <TouchableOpacity onPress={() => touchHandler(item, 'Add')}>
@@ -28,6 +28,7 @@ let spStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',

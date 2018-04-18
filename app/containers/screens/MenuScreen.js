@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import genericStyles from '../styles';
 import { Banner, ScrollablePage, CartAlert } from '../../components';
 import { ItemModal } from '../modals';
 
@@ -12,10 +13,6 @@ class Menu extends React.Component {
     this.state = {
       itemSelected: false
     }
-  }
-
-  componentDidMount() {
-    // console.log(this.props.navStack)
   }
 
   chooseItem(item) {
@@ -31,7 +28,6 @@ class Menu extends React.Component {
   }
 
   back() {
-    console.log('PARETN is this triggign?')
     let navStack = this.props.navStack;
     navStack.pop();
     this.props.updateNavigationStack(navStack);

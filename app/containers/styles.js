@@ -1,4 +1,4 @@
-// import React from 'react';
+
 import { StyleSheet } from 'react-native';
 
 const genericStyles = StyleSheet.create({
@@ -7,10 +7,15 @@ const genericStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  text: {
-    color: 'black',
-    fontSize: 14,
+  modalText: {
+    fontSize: 18,
     fontWeight: 'bold'
+  },
+  buttonStyle: {
+    color:'white',
+    fontWeight: 'bold',
+    fontSize: 15,
+    textAlign: 'center'
   }
 })
 

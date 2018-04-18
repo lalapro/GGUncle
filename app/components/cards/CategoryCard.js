@@ -1,36 +1,38 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import TextView from '../TextView.js';
+const { width, height } = Dimensions.get("window");
+import genericStyles from '../styles';
 
-
-
-let { width, height } = Dimensions.get("window");
-
-let CARD_HEIGHT = height / 6;
-let CARD_WIDTH = width / 2 - 20;
 
 export default class CategoryCard extends React.Component {
   render() {
     let category = this.props.category;
+
     return (
-      <View style={styles.categoryCard}>
-        <TouchableOpacity style={styles.categoryCard} onPress={() => this.props.clickHandler(category.id, category.name)}>
+      <View style={spStyles.categoryCard}>
+        <TouchableOpacity style={spStyles.categoryCard} onPress={() => this.props.clickHandler(category.id, category.name)}>
           <Image
-            style={styles.cardImage}
+            style={spStyles.cardImage}
             resizeMode="cover"
             source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
           />
-          <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute'}}>
-            <Text style={styles.text}>
-              {category.name}
-            </Text>
-          </View>
+          <TextView
+            viewStyle={[genericStyles.flexContainer, { position: 'absolute'}]}
+            textStyle={spStyles.text}
+            text={category.name}
+          />
         </TouchableOpacity>
       </View>
     )
   }
 }
 
-let styles = StyleSheet.create({
+
+const CARD_HEIGHT = height / 6;
+const CARD_WIDTH = width / 2 - 20;
+
+const spStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -54,5 +56,5 @@ let styles = StyleSheet.create({
   text: {
     position: 'absolute',
     color: 'white'
-  }
+  },
 });

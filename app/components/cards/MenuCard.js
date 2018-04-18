@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'rea
 let { width, height } = Dimensions.get("window");
 import { convertPrice } from '../../helpers';
 
-const CARD_HEIGHT = height / 6;
-const CARD_WIDTH = width - 50;
+import genericStyles from '../styles';
+
 
 
 export default class MenuCard extends React.Component {
@@ -15,21 +15,21 @@ export default class MenuCard extends React.Component {
     let description = this.props.menu.description;
     // console.log(this.props.)
     return (
-      <View style={styles.menuCard}>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={spStyles.menuCard}>
+          <View style={genericStyles.flexContainer}>
             <TouchableOpacity style={{width: "100%", height: "100%", flexDirection: 'row'}} onPress={() => this.props.clickHandler(menu)}>
               <View style={{flex: 1}}>
                 <Image
-                  style={styles.menuImage}
+                  style={spStyles.menuImage}
                   resizeMode="cover"
                   source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
                 />
               </View>
-              <View style={{flex: 2, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-                <Text style={styles.text}>
+              <View style={[genericStyles.flexContainer, { flex: 2 }]}>
+                <Text style={spStyles.text}>
                   {menu.name}
                 </Text>
-                <Text style={styles.text}>
+                <Text style={spStyles.text}>
                   {convertPrice(menu.productOptions[0].price)}
                 </Text>
               </View>
@@ -39,8 +39,10 @@ export default class MenuCard extends React.Component {
     )
   }
 }
+const CARD_HEIGHT = height / 6;
+const CARD_WIDTH = width - 50;
 
-let styles = StyleSheet.create({
+let spStyles = StyleSheet.create({
   menuCard: {
     padding: 3,
     width: CARD_WIDTH,

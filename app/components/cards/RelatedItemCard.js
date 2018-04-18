@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'rea
 
 import { convertPrice, getQuantity } from '../../helpers';
 import { QuantityControl } from '../buttons';
+import TextView from '../TextView';
+import genericStyles from '../styles'
 
 let { width, height } = Dimensions.get("window");
 
@@ -25,19 +27,19 @@ export default class RelatedItemCard extends React.Component {
   render() {
     let { title, item, itemKey, touchHandler, selection, main } = this.props;
     return (
-      <View style={styles.menuCard}>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}} >
-          <View style={{flex: 3, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <View style={{flex: 2}}>
-              <Text style={[styles.text, {textAlign: 'left'}]}>
-                {itemKey[item].name}
-              </Text>
-            </View>
-            <View style={{flex: 1}}>
-              <Text style={[styles.text, {fontSize: 14}]}>
-                ({convertPrice(itemKey[item].price)})
-              </Text>
-            </View>
+      <View style={spStyles.menuCard}>
+        <View style={[spStyles.flexContainer, { width: '85%' }]} >
+          <View style={[spStyles.flexContainer, { flex: 3 }]}>
+            <TextView
+              viewStyle={{flex: 2}}
+              textStyle={[spStyles.text, {textAlign: 'left'}]}
+              text={itemKey[item].name}
+            />
+            <TextView
+              viewStyle={{flex: 1}}
+              textStyle={[spStyles.text, {fontSize: 14}]}
+              text={`(${convertPrice(itemKey[item].price)})`}
+            />
           </View>
           <QuantityControl
             item={itemKey[item]}
@@ -50,7 +52,14 @@ export default class RelatedItemCard extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
+let spStyles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%'
+  },
   menuCard: {
     flex: 1,
     justifyContent: 'center',

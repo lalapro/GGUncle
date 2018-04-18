@@ -1,4 +1,5 @@
 let addToCart = (selection, cart) => {
+  console.log(cart);
   let totalPrice = cart.totalPrice;
   let totalQuantity = cart.totalQuantity;
 

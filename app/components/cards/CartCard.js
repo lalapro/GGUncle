@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Modal, TouchableOpacity, Dimensions } from 'react-native';
-import genericStyles from './styles';
+import genericStyles from '../styles';
 import BulletPointCard from './BulletPointCard';
-import { TextView } from '../pages';
+import TextView from '../TextView.js';
 import { convertPrice } from '../../helpers';
-let { WIDTH, HEIGHT } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
 export default class CartCard extends React.Component {
   render() {
@@ -48,8 +48,8 @@ export default class CartCard extends React.Component {
 }
 
 
-const CARD_HEIGHT = HEIGHT / 6;
-const CARD_WIDTH = WIDTH - 50;
+const CARD_HEIGHT = height / 6;
+const CARD_WIDTH = width - 50;
 
 const spStyles = StyleSheet.create({
   container: {

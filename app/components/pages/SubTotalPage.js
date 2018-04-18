@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { convertPrice, limitCharacters } from '../../helpers';
 
-const { WIDTH, HEIGHT } = Dimensions.get("window");
 
 
 
@@ -34,24 +33,7 @@ export default class SubTotalPage extends React.Component {
 }
 
 
-const CARD_HEIGHT = HEIGHT / 5;
-const CARD_WIDTH = WIDTH / 2;
-
 let styles = StyleSheet.create({
-  itemCard: {
-    padding: 3,
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 25,
-    color: 'black',
-    flexWrap: 'wrap',
-    textAlign: 'center',
-    margin: 5
-  },
   column: {
     flex: 1,
     flexDirection: 'row',

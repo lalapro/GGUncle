@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, AsyncStorage, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import { Banner, ScrollablePage, CartAlert } from '../../components';
+import genericStyles from '../styles'
+import { Banner, ScrollablePage, CartAlert, TextView } from '../../components';
 import { ItemModal } from '../modals';
 
 
@@ -10,6 +11,7 @@ class AccountScreen extends React.Component {
   logout() {
     this.props.updateNavigationStack([]);
     this.props.updateAccount({});
+    this.props.updateCart({ items: {}, totalPrice: 0, totalQuantity: 0});
     AsyncStorage.clear();
     this.props.navigation.navigate('LandingPage');
 
@@ -19,15 +21,16 @@ class AccountScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Banner title={"Account Information"}/>
-        <View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Your Phone is: {this.props.account.phone}</Text>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <TextView
+          viewStyle={[genericStyles.flexContainer, { flex: 7 }]}
+          text={`Your Phone is: ${this.props.account.phone}`}
+        />
+        <View style={genericStyles.flexContainer}>
           <TouchableOpacity
             onPress={this.logout.bind(this)}
             style={styles.buttonStyle}
           >
-            <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, textAlign: 'center'}}>Logout</Text>
+            <Text style={genericStyles.buttonStyle}> Logout </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -39,8 +42,7 @@ class AccountScreen extends React.Component {
 
 
 let mapDispatchToProps = (dispatch) => ({
-  updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
-  updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
+  updateCart: (cart) => dispatch(actions.updateCart(cart)),
   updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack)),
   updateAccount: (account) => dispatch(actions.updateAccount(account))
 })

@@ -2,12 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { convertPrice, limitCharacters, getQuantity } from '../../helpers';
 import { QuantityControl } from '../buttons';
+import TextView from '../TextView'
+
+import genericStyles from '../styles';
 
 let { width, height } = Dimensions.get("window");
-
-const CARD_HEIGHT = height / 5;
-const CARD_WIDTH = width / 2;
-
 
 export default class ItemPage extends React.Component {
 
@@ -32,41 +31,44 @@ export default class ItemPage extends React.Component {
     let { name, description, sides } = this.props.item;
     let { allSides, touchHandler, item, selection } = this.props;
     return (
-      <View style={{flex: 5, justifyContent: 'center', alignItems: 'center', width: "100%"}}>
-
-        <View style={{flex: 4, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={[genericStyles.flexContainer, { flex: 5 }]}>
+        <View style={[genericStyles.flexContainer, { flex: 3}]}>
           <Image
             style={{width: CARD_WIDTH, height: CARD_HEIGHT}}
             resizeMode="contain"
             source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
           />
-          <Text style={styles.text}>
+          <Text style={spStyles.text}>
             {name}
           </Text>
         </View>
-
         <View style={{flex: 0.5, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}}>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18}}>{convertPrice(item.productOptions[0].price * getQuantity(item.id, selection))}</Text>
-          </View>
+          <TextView
+            viewStyle={[genericStyles.flexContainer, { alignItems: 'flex-end' }]}
+            textStyle={{fontWeight: 'bold', fontSize: 18}}
+            text={convertPrice(item.productOptions[0].price * getQuantity(item.id, selection))}
+          />
           <QuantityControl
             item={item}
             quantity={getQuantity(item.id, selection)}
             touchHandler={this.updateSelection.bind(this)}
           />
         </View>
-
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={[styles.text, {fontSize: 12}]}>
-            {limitCharacters(description)}
-          </Text>
-        </View>
+        <TextView
+          viewStyle={genericStyles.flexContainer}
+          textStyle={[spStyles.text, {fontSize: 12}]}
+          text={limitCharacters(description)}
+        />
       </View>
     )
   }
 }
 
-let styles = StyleSheet.create({
+
+const CARD_HEIGHT = height / 5;
+const CARD_WIDTH = width / 2;
+
+let spStyles = StyleSheet.create({
   itemCard: {
     padding: 3,
     width: CARD_WIDTH,

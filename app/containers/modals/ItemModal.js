@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import genericStyles from '../styles';
 import { Banner, ScrollablePage, GenericButton, ItemPage } from '../../components';
 import { convertPrice, addToCart, modifySelection } from '../../helpers';
 
 let { width, height } = Dimensions.get("window");
 
 class Item extends React.Component {
+
   updateCart(selection) {
     let cart = this.props.cart;
     cart = addToCart(selection, cart);
@@ -16,17 +18,10 @@ class Item extends React.Component {
     this.props.close();
   }
 
-
   updateCurrentSelection(itemId, itemObj, method, sides) {
     let selection = this.props.selection;
     selection = modifySelection(itemId, itemObj, method, selection, sides);
     this.props.updateSelection(selection);
-  }
-
-
-  test() {
-    console.log('yo')
-    /*TODO pagination*/
   }
 
   render() {
@@ -34,7 +29,7 @@ class Item extends React.Component {
     let { navigation, sides, cart, selection } = this.props;
     let price = convertPrice(price);
     return (
-      <View style={styles.container}>
+      <View style={genericStyles.flexContainer}>
         <Image
           onTouchEnd={() => {this.props.close()}}
           source={require('../../assets/exit.png')}
@@ -47,7 +42,7 @@ class Item extends React.Component {
           allSides={sides}
           selection={selection}
           touchHandler={this.updateCurrentSelection.bind(this)}/>
-        <Text style={[styles.text, {fontSize: 20, fontWeight: 'bold', textAlign: 'left'}]}>
+        <Text style={[genericStyles.modalText, {fontSize: 20, textAlign: 'left'}]}>
           Sides
         </Text>
         <ScrollablePage
@@ -88,12 +83,3 @@ export default connect((store) => {
     selection: store.selection
   }
 }, mapDispatchToProps)(Item)
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

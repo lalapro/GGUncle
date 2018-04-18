@@ -4,7 +4,6 @@ import { createNavigator, createNavigationContainer, TabRouter, addNavigationHel
 import { connect } from 'react-redux';
 import actions from '../actions';
 import { LandingPage, HomeScreen, MenuScreen, CartScreen, AccountScreen } from '../containers';
-console.log('whatup', LandingPage)
 import SignUpNavigator from './SignUpNavigator';
 
 

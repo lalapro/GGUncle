@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import genericStyles from '../styles';
 import { getQuantity, editCart, convertPrice } from '../../helpers';
 import { Banner, ScrollablePage, SubTotalPage, BulletPointCard, QuantityControl, TextView } from '../../components';
 
@@ -26,26 +27,25 @@ class EditModal extends React.Component {
     let { close, item } = this.props;
     let sides = item.sides ? Object.values(item.sides) : [];
     return (
-      <View style={styles.container}>
+      <View style={genericStyles.flexContainer}>
         <TextView
-          viewStyle={{flex: 1, justifyContent: 'center', alignItems: 'center', width: '75%'}}
-          textStyle={{fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center'}}
+          viewStyle={[genericStyles.flexContainer, { width: '75%' }]}
+          textStyle={[genericStyles.modalText, { textAlign: 'center', flexWrap: 'wrap' }]}
           text={item.name}
         />
-        {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: '75%'}}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center'}}>{item.name}</Text>
-        </View> */}
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}}>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18}}>{convertPrice(item.price * item.quantity)}</Text>
-          </View>
+        <View style={[genericStyles.flexContainer, { width: '85%', justifyContent: 'space-around', flexDirection: 'row' }]}>
+          <TextView
+            viewStyle={[genericStyles.flexContainer, { alignItems: 'flex-end' }]}
+            textStyle={genericStyles.modalText}
+            text={convertPrice(item.price * item.quantity)}
+          />
           <QuantityControl
             item={item}
             quantity={item.quantity}
             touchHandler={this.updateMains.bind(this)}
           />
         </View>
-        <View style={{flex: 5, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={[genericStyles.flexContainer, { flex: 5 }]}>
           {sides.map((side, i) => (
             <View key={side.name} style={{flex: 1, flexDirection: 'row'}}>
               <View style={{flex: 3}}>
@@ -61,9 +61,11 @@ class EditModal extends React.Component {
             </View>
           ))}
         </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
-          <TouchableOpacity style={styles.buttonStyle} onPress={() => {close()}}>
-            <Text style={{fontSize: 15, fontWeight: 'bold', textAlign: 'center', color: 'white'}}>Confirm Changes</Text>
+        <View style={[genericStyles.flexContainer, { alignItems: 'flex-end' }]}>
+          <TouchableOpacity style={spStyles.buttonStyle} onPress={() => {close()}}>
+            <Text style={genericStyles.buttonStyle}>
+              Confirm Changes
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -81,14 +83,7 @@ export default connect((store) => {
   }
 }, mapDispatchToProps)(EditModal)
 
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '50%'
-  },
+let spStyles = StyleSheet.create({
   buttonStyle: {
     margin: 10,
     backgroundColor: '#36B325',

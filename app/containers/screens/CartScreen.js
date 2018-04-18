@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import { Banner, ScrollablePage, SubTotalPage } from '../../components';
+import genericStyles from '../styles';
+import { Banner, ScrollablePage, SubTotalPage, TextView } from '../../components';
 import { EditModal } from '../modals';
 
 
@@ -45,14 +46,13 @@ class Cart extends React.Component {
     let cartItems = Object.values(cart.items) || [];
     // console.log(cart);
     return (
-      <View style={styles.container}>
+      <View style={genericStyles.flexContainer}>
         <Banner title={"Your Cart"} back={this.back.bind(this)}/>
         {cartItems.length === 0 ? (
-          <View style={{flex: 6, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>
-              Your cart is empty!
-            </Text>
-          </View>
+          <TextView
+            viewStyle={[genericStyles.flexContainer, { flex: 6 }]}
+            text={"Your Cart is Empty!"}
+          />
         ) : (
           <ScrollablePage
             cards={cartItems}
@@ -95,12 +95,6 @@ export default connect((store) => {
 }, mapDispatchToProps)(Cart)
 
 let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   otherModal: {
     backgroundColor: 'white',
     padding: 2,

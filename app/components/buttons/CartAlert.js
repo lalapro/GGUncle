@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import genericStyles from './styles.js';
+import genericStyles from '../styles.js';
 import { convertPrice } from '../../helpers';
 
 export default class CartAlert extends React.Component {
@@ -12,9 +12,9 @@ export default class CartAlert extends React.Component {
           style={spStyles.button}
           onPress={() => navigation.navigate('Cart')}
         >
-          <Text style={genericStyles.text}>{convertPrice(cart.totalPrice)}</Text>
-          <Text style={genericStyles.text}>View Cart</Text>
-          <Text style={genericStyles.text}>{cart.totalQuantity}</Text>
+          <Text style={genericStyles.buttonText}>{convertPrice(cart.totalPrice)}</Text>
+          <Text style={genericStyles.buttonText}>View Cart</Text>
+          <Text style={genericStyles.buttonText}>{cart.totalQuantity}</Text>
         </TouchableOpacity>
       </View>
     )

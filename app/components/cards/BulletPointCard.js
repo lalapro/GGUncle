@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import genericStyles from './styles.js';
+import genericStyles from '../styles.js';
 import { convertPrice } from '../../helpers';
 
 export default class BulletPointCard extends React.Component {

@@ -1,5 +1,5 @@
 import { database } from '../firebase';
-import { createItemHash } from '../components';
+import { createItemHash } from '../helpers';
 
 const SIDESREF = database.menuItems.child('digestData').child('sides');
 

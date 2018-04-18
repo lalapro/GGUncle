@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal, Dimensions, TextInput, TouchableOpacity, Keyboard, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import genericStyles from '../styles';
 import { Banner, LandingPageButtons } from '../../components';
 import { SignUpNavigator } from '../../navigators';
 import { database } from '../../firebase';
@@ -77,10 +78,14 @@ class LandingPage extends React.Component {
   render() {
     let { navigation } = this.props;
     return (
-      <View style={styles.container}>
-        <Image resizeMode="contain" style={{width: 100, position: 'absolute', zIndex: 10, top: 50}} source={require('../../assets/van.png')}/>
-        <Banner title={"Eat the Dream. On Demand."}/>
-        <View style={{flex: 3, backgroundColor: 'black', width: '70%', alignItems: 'flex-start'}}>
+      <View style={[genericStyles.flexContainer, { backgroundColor: 'black' }]}>
+        <View style={{flex: 2}}>
+          <Banner title={"Eat the Dream. On Demand."}/>
+        </View>
+        <View style={genericStyles.flexContainer}>
+          <Image resizeMode="contain" style={{width: 100, height: 100, zIndex: 99}} source={require('../../assets/van.png')}/>
+        </View>
+        <View style={{flex: 2, width: '70%', alignItems: 'flex-end'}}>
           <TouchableOpacity
             onPress={() => this.focus("phone")}
             style={{width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}
@@ -91,11 +96,7 @@ class LandingPage extends React.Component {
               resizeMode={'contain'}
             />
             <TextInput
-              style={{
-                color: 'white',
-                width: "100%",
-                fontWeight: 'bold',
-              }}
+              style={spStyles.textStyle}
               placeholder={"Phone Number"}
               onChangeText={(phone) => this.setState({phone})}
               value={this.state.phone}
@@ -114,23 +115,26 @@ class LandingPage extends React.Component {
               resizeMode={'contain'}
             />
             <TextInput
-              style={{
-                color: 'white',
-                width: "100%",
-                fontWeight: 'bold',
-              }}
+              style={spStyles.textStyle}
               placeholder={"Password"}
               onChangeText={(password) => this.setState({password})}
               value={this.state.password}
               autoCapitalize={"none"}
               placeholderTextColor={"white"}
               onSubmitEditing={Keyboard.dismiss}
+              secureTextEntry={true}
               ref={"password"}
             />
           </TouchableOpacity>
           {this.state.notFound ? (
             <View style={{width: '100%'}}>
-              <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
+              <Text
+                style={[spStyles.textStyle, {
+                  color: 'red',
+                  marginBottom: 15,
+                  fontSize: 20,
+                  margin: 10
+              }]}>
                 Login credentials are incorrect!
               </Text>
             </View>
@@ -144,7 +148,7 @@ class LandingPage extends React.Component {
         >
           <SignUpNavigator screenProps={{
             close: this.close.bind(this),
-            navigation: navigation
+            login: this.navigateToHomeScreen.bind(this)
           }}/>
         </Modal>
       </View>
@@ -166,7 +170,7 @@ export default connect((store) => {
   }
 }, mapDispatchToProps)(LandingPage)
 
-let styles = StyleSheet.create({
+let spStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
@@ -182,10 +186,9 @@ let styles = StyleSheet.create({
     minWidth: "80%"
   },
   textStyle: {
-    fontSize:20,
-    margin: 10,
-    fontWeight: 'bold',
     color: 'white',
+    width: "100%",
+    fontWeight: 'bold',
     textAlign: 'center'
   },
 });

@@ -16,7 +16,8 @@ class Phone extends React.Component {
     super(props);
     this.state = {
       phone: '',
-      found: false
+      found: false,
+      validPhone: true
     }
   }
 
@@ -26,14 +27,19 @@ class Phone extends React.Component {
 
   confirmSignUp() {
     let phone = this.state.phone;
-    USERREF.child(phone).once('value', snap => {
-      if (snap.val()) {
-        this.setState({found: true})
-      } else {
-        this.props.navigation.push('Password', {phone})
-      }
-    })
+    if (phone.length === 10) {
+      USERREF.child(phone).once('value', snap => {
+        if (snap.val()) {
+          this.setState({found: true})
+        } else {
+          this.props.navigation.push('Password', {phone})
+        }
+      })
+    } else {
+      this.setState({validPhone: false});
+    }
   }
+
 
   render() {
     return (
@@ -44,6 +50,7 @@ class Phone extends React.Component {
           </Text>
           <TextInput
             style={{
+              fontSize: 20,
               color: 'white',
               width: "100%",
               fontWeight: 'bold',
@@ -63,6 +70,13 @@ class Phone extends React.Component {
             </Text>
           </View>
         ) : (null)}
+        {!this.state.validPhone ? (
+          <View>
+            <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
+              Not a valid phone number!
+            </Text>
+          </View>
+        ) : (null)}
         <View style={{flex: 3, flexDirection: 'row', alignItems: 'flex-start'}}>
           <GenericButton title={"Back"} touchHandler={this.back.bind(this)}/>
           <GenericButton title={"Confirm"} touchHandler={this.confirmSignUp.bind(this)}/>
@@ -76,7 +90,8 @@ class Password extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: ''
+      password: '',
+      validPassword: true
     }
   }
 
@@ -87,38 +102,51 @@ class Password extends React.Component {
   confirmSignUp() {
     let phone = this.props.navigation.state.params.phone;
     let password = this.state.password;
-    USERREF.child(phone).setValue(password);
-    this.props.screenProps.navigation.navigate('Home')
+    if (password.length === 6) {
+      let user = {};
+      user[phone] = password;
+      USERREF.update(user);
+      this.props.screenProps.close();
+      this.props.screenProps.login(phone)
+    } else {
+      this.setState({validPassword: false})
+    }
   }
 
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 9, alignItems: 'center'}}>
-          <View style={{flex: 1, justifyContent: 'flex-start'}}>
-            <Text style={styles.textStyle}>
-              Please Enter Your Password:
+        <View style={{flex: 1, justifyContent: 'flex-start'}}>
+          <Text style={styles.textStyle}>
+            Please Enter Your Password
+          </Text>
+          <TextInput
+            style={{
+              fontSize: 20,
+              color: 'white',
+              width: "100%",
+              fontWeight: 'bold',
+              marginLeft: width/2,
+              marginRight: width/2
+            }}
+            onChangeText={(password) => this.setState({password})}
+            value={this.state.password}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+            autoFocus={true}
+          />
+        </View>
+        {!this.state.validPassword ? (
+          <View>
+            <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
+              Password must be 6 characters
             </Text>
-            <TextInput
-              style={{
-                color: 'white',
-                width: "80%",
-                justifyContent: 'center',
-                textAlign: 'center',
-                marginLeft: width/2,
-                marginRight: width/2,
-                fontWeight: 'bold'}}
-              onChangeText={(password) => this.setState({password})}
-              value={this.state.password}
-              autoFocus={true}
-              secureTextEntry={true}
-            />
           </View>
-          <View style={{flex: 8, flexDirection: 'row', alignItems: 'flex-start'}}>
-            <GenericButton title={"Back"} touchHandler={this.back.bind(this)}/>
-            <GenericButton title={"Confirm"} touchHandler={this.confirmSignUp.bind(this)}/>
-          </View>
+        ) : (null)}
+        <View style={{flex: 3, flexDirection: 'row', alignItems: 'flex-start'}}>
+          <GenericButton title={"Back"} touchHandler={this.back.bind(this)}/>
+          <GenericButton title={"Confirm"} touchHandler={this.confirmSignUp.bind(this)}/>
         </View>
       </View>
     )

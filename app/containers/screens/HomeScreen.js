@@ -2,18 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import genericStyles from '../styles';
 import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../components';
 
 
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
 
   chooseCategory(id, category) {
     this.props.updateSides();
@@ -21,18 +15,13 @@ class Home extends React.Component {
     navStack.push('Menu');
     this.props.updateNavigationStack(navStack);
     this.props.updateCurrentCategory(id).then(mains => this.props.navigation.navigate('Menu'));
-
-  }
-
-  back() {
-    this.props.navigation.navigate('Home');
   }
 
   render() {
     let { cart, allCategories, navigation } = this.props;
     allCategories = Object.values(allCategories);
     return (
-      <View style={styles.container}>
+      <View style={genericStyles.flexContainer}>
         <Banner title={"All Categories"}/>
         <ScrollablePage
           cards={allCategories}
@@ -61,12 +50,3 @@ export default connect((store)=>{
     navStack: store.navStack,
   }
   }, mapDispatchToProps)(Home)
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import genericStyles from './styles.js';
+import genericStyles from '../styles.js';
 import { convertPrice } from '../../helpers';
 
 export default class GenericButton extends React.Component {
@@ -14,7 +14,7 @@ export default class GenericButton extends React.Component {
             style={[spStyles.button, { backgroundColor: color }]}
             onPress={() => touchHandler()}
           >
-            <Text style={genericStyles.text}> {title} </Text>
+            <Text style={genericStyles.buttonText}> {title} </Text>
           </TouchableOpacity>
         </View>
       </View>
