@@ -1,10 +1,9 @@
 import { database } from '../firebase';
 
-
-const MAINSREF = database.menuItems.child('digestData').child('mains');
 const CATSREF = database.menuItems.child('digestData').child('categories')
 
-
+// updates currentCategory in store,
+// is triggered every time a new category is clicked
 async function getRelatedMains(id) {
   const CURRENTCATEGORY = {};
   let mains = [];

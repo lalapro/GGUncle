@@ -8,7 +8,9 @@ import { ItemModal } from '../modals';
 
 
 class AccountScreen extends React.Component {
+
   logout() {
+    // logout should clear AsyncStorage, cart, selection, and navigation stack;
     this.props.updateNavigationStack([]);
     this.props.updateAccount({});
     this.props.updateCart({ items: {}, totalPrice: 0, totalQuantity: 0});

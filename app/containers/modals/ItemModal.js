@@ -11,9 +11,11 @@ let { width, height } = Dimensions.get("window");
 class Item extends React.Component {
 
   updateCart(selection) {
+    // triggered when "ADD TO CART" button is pressed.
     let cart = this.props.cart;
     cart = addToCart(selection, cart);
     this.props.updateCart(cart);
+    // clear current selection
     this.props.updateSelection({items: {}, totalPrice: 0});
     this.props.close();
   }

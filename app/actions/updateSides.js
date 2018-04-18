@@ -3,7 +3,8 @@ import { createItemHash } from '../helpers';
 
 const SIDESREF = database.menuItems.child('digestData').child('sides');
 
-
+// creates an object from the sides array in the database
+// used for reference and instance lookup when put into store.
 async function getAllSides() {
   const SIDES = await createItemHash(SIDESREF);
   return SIDES;

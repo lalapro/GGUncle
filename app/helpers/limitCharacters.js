@@ -1,3 +1,5 @@
+// limits the amount of characters to show,
+// used for item descriptions
 let limitCharacters = (string) => {
   string = string || '';
   if (string.length > 150) {

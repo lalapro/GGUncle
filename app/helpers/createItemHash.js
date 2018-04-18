@@ -1,4 +1,5 @@
-
+// creates an object from an array
+// possible to pass in variable to limit queries
 let hashCreator = async (ref, limit) => {
   limit = limit || 100;
   let PRODUCTS = {};

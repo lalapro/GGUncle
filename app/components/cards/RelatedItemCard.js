@@ -14,6 +14,7 @@ const CARD_WIDTH = width - 50;
 export default class RelatedItemCard extends React.Component {
 
   updateSelection(side, method) {
+    // this function creates the object used for tracking what sides are currently selected
     let main = this.props.main;
     let obj = {
       name: side.name,

@@ -24,6 +24,7 @@ class Cart extends React.Component {
   }
 
   back() {
+    // remove last screen in stack, navigate to next-to-last
     let navStack = this.props.navStack;
     navStack.pop();
     this.props.updateNavigationStack(navStack);

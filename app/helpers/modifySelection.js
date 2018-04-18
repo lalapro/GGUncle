@@ -1,11 +1,16 @@
+// this function is to update currently selected items,
+// used for rendering instant update on possible prices
+
 let modifySelection = (itemId, itemObj, method, selection, sideId) => {
   let main = selection.items[itemId];
   if (method === 'Add') {
+    // if main item does not exist, we have to create it
     if (main === undefined) {
       selection.items[itemId] = itemObj;
       selection.totalPrice += itemObj.price;
       selection.items[itemId].sides = {};
     } else {
+      // else we just update it
       let price = main.price;
       if (sideId) {
         if (main.sides[sideId]) {

@@ -11,12 +11,14 @@ let { width, height } = Dimensions.get("window");
 export default class ItemPage extends React.Component {
 
   componentDidMount() {
+    // if item isn't currently selected, add it into the selection
     if (this.props.selection.totalPrice === 0) {
       this.updateSelection(this.props.item, 'Add')
     }
   }
 
   updateSelection(item, method) {
+    // this function is used to update the currenly selected main into the store
     item.price = item.price || item.productOptions[0].price;
     let obj = {
       name: item.name,

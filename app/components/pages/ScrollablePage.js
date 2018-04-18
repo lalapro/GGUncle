@@ -4,11 +4,10 @@ import ItemPage from './ItemPage'
 import { CategoryCard, MenuCard, RelatedItemCard, CartCard } from '../cards';
 import { CartButton } from '../buttons'
 
-// console.log(x)
-
 
 export default class ScrollablePage extends React.Component {
   cardToRender(cardStyle, card) {
+    // determine which card to render based on props
     if (cardStyle === 'Category') {
       return (
         <CategoryCard

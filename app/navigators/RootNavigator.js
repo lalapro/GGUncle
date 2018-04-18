@@ -1,3 +1,8 @@
+// this is a custom navigator/router, allows all screens to share navigation commands and props
+// though props are not needed b/c of redux
+// mainly helps with a prettier navigation tab ...
+
+
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { createNavigator, createNavigationContainer, TabRouter, addNavigationHelpers } from 'react-navigation';
@@ -19,7 +24,8 @@ let IMAGES = [
 let CustomTabView = ({ router, navigation }) => {
   let { routes, index } = navigation.state;
   let ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
-  if (routes[index].routeName === 'LandingPage' || routes[index].routeName === 'LoadingPage') {
+  if (routes[index].routeName === 'LandingPage') {
+    // don't render navigation tab for LandingPage
     return (
       <View style={{flex: 1}}>
         <ActiveScreen

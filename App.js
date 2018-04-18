@@ -5,7 +5,6 @@ import { Provider, connect } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reduce from './app/reducers';
-import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
 import { RootNavigator, SignUpNavigator} from './app/navigators';
 

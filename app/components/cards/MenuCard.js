@@ -13,7 +13,6 @@ export default class MenuCard extends React.Component {
   render() {
     let menu = this.props.menu;
     let description = this.props.menu.description;
-    // console.log(this.props.)
     return (
       <View style={spStyles.menuCard}>
           <View style={genericStyles.flexContainer}>

@@ -1,9 +1,8 @@
 import { database } from '../firebase';
 
-const MAINSREF = database.menuItems.child('digestData').child('mains');
-const CATSREF = database.menuItems.child('digestData').child('categories')
+const CATSREF = database.menuItems.child('digestData').child('categories');
 
-
+// creates an object with each category as an ID, used to render all categories in HOME screen
 async function filterCategories() {
   const CATEGORIES = {};
   let categories = await CATSREF.once('value', snap => {

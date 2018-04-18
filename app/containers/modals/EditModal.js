@@ -10,6 +10,7 @@ import { Banner, ScrollablePage, SubTotalPage, BulletPointCard, QuantityControl,
 class EditModal extends React.Component {
 
   updateSides(side, method) {
+    // used to add/remove sides from cart;
     let cart = this.props.cart;
     let main = this.props.item;
     cart = editCart(cart, main.id, method, side.id);
@@ -17,6 +18,7 @@ class EditModal extends React.Component {
   }
 
   updateMains(main, method) {
+    // used to add/remove mains from cart;
     let cart = this.props.cart;
     cart = editCart(cart, main.id, method);
     this.props.updateCart(cart);

@@ -1,3 +1,5 @@
+// function to get quantity of mains and sides
+
 let getQuantity = (mainId, selection, sideId) => {
   let main = selection.items[mainId];
   if (sideId) {
