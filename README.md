@@ -21,11 +21,11 @@ To run simulator, type in the following in the terminal:
 `Fix` -> On Mac, cmd + space and type in simulator, it should show up with the app loaded
 
 ## Android
-1. start up simulator (I used genymotion)
-When simulator is up, type the following in the terminal:
+1. start up your choice of simulator (I used genymotion)
+2. When simulator is up, type the following in the terminal:
 `npm run android`
 
-* Simulator must be loaded before running the command, app should load straight into simulator
+* Simulator **must(!)** be loaded before running the command, application should load straight into open simulator
 
 ## Troubleshooting (Android)
 
@@ -38,7 +38,9 @@ then run the command `npm run android` again.
 
 * If on Android SDK, go to Tools -> Android -> Sync Project with Gradle Files before clicking Run
 
-#### Important
+# Important!!!!
+
+* For android simulator, please go to `Dev Settings` and UNCHECK `JS Dev Mode`, else the application will be *very* laggy. Checkout screenshots for how to access it.
 
 * The search icon and the home icon route to the same screen
 
@@ -48,8 +50,9 @@ then run the command `npm run android` again.
 ## Screenshots
 
 <div style="width:100%">
-  <img src="https://i.imgur.com/WBv4dxA.gifv" width="20%"/>
   <img src="https://i.imgur.com/VjVbbLk.png" width="20%"/>
   <img src="https://i.imgur.com/HO6lgEk.png" width="20%"/>
   <img src="https://i.imgur.com/ZHlDOzp.png" width="20%"/>
+  <img src="https://i.imgur.com/4S8tBxK.png" width="20%"/>
+  <img src="https://i.imgur.com/tUOPelC.png" width="20%"/>
 </div>
