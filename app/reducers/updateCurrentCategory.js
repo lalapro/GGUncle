@@ -1,4 +1,4 @@
-export default updateCurrentCategory = (store = {}, action) => {
+let updateCurrentCategory = (store = {}, action) => {
   switch(action.type) {
     case 'UPDATE_CURRENT_CATEGORY':
       return action.payload;
@@ -6,3 +6,5 @@ export default updateCurrentCategory = (store = {}, action) => {
       return store;
   }
 };
+
+export default updateCurrentCategory;
