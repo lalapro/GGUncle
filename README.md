@@ -3,12 +3,13 @@ In terminal, run the following commands.
 1. `git clone https://github.com/lalapro/GGUncle.git`
 2. `cd GGUncle`
 3. `npm install`
+4. Follow steps for your preferred device/simulator
 
 
 
-## iPhone
-(Assuming xCode is installed)
+## iPhone (XCode must be installed for this command to work)
 
+To run simulator, type in the following in the console:
 `npm run iPhone8` or `npm run iPhone8Plus`
 
 ## Troubleshooting (iPhone)
@@ -21,6 +22,7 @@ In terminal, run the following commands.
 
 ## Android
 1. start up simulator (I used genymotion)
+When simulator is up, type the following in the console:
 `npm run android`
 
 ## Troubleshooting (Android)
