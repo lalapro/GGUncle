@@ -1,13 +1,14 @@
 ## How to run
-In terminal, do the following..
-1. git clone https://github.com/lalapro/GGUncle.git
-2. cd GGUncle
-3. npm install
+In terminal, run the following commands.
+1. `git clone https://github.com/lalapro/GGUncle.git`
+2. `cd GGUncle`
+3. `npm install`
 
 
 
 ## iPhone
 (Assuming xCode is installed)
+
 `npm run iPhone8` or `npm run iPhone8Plus`
 
 ## Troubleshooting (iPhone)
