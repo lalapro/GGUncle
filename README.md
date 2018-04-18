@@ -32,7 +32,7 @@ When simulator is up, type the following in the terminal:
 
 `react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res`
 
-then `npm run android`
+then run the command `npm run android` again.
 
 #### Important
 * Simulator must be loaded before running the command, app should load straight into simulator
