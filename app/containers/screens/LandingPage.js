@@ -136,7 +136,7 @@ class LandingPage extends React.Component {
                   fontSize: 20,
                   margin: 10
               }]}>
-                Login credentials are incorrect!
+                Bad Login.
               </Text>
             </View>
           ) : (null)}
