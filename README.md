@@ -25,6 +25,8 @@ To run simulator, type in the following in the terminal:
 When simulator is up, type the following in the terminal:
 `npm run android`
 
+* Simulator must be loaded before running the command, app should load straight into simulator
+
 ## Troubleshooting (Android)
 
 ##### `unable to load script from assets index.android.bundle`
@@ -34,12 +36,13 @@ When simulator is up, type the following in the terminal:
 
 then run the command `npm run android` again.
 
+* If on Android SDK, go to Tools -> Android -> Sync Project with Gradle Files before clicking Run
+
 #### Important
-* Simulator must be loaded before running the command, app should load straight into simulator
 
-* If on Android SDK, go to Tools -> Android -> Sync Project with Gradle Files
+* The search icon and the home icon route to the same screen
 
-* Click Run 'App', choose the deployment target and press Ok.
+* To login, please click on the text "Phone number" or the phone icon
 
 
 ## Screenshots
