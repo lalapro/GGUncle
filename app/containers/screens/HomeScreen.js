@@ -8,6 +8,13 @@ import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../component
 
 console.disableYellowBox = true;
 class Home extends React.Component {
+  componentDidMount() {
+    // reset navStack whenever we got back to Home
+    let navStack = [];
+    navStack.push('Home');
+    this.props.updateNavigationStack(navStack);
+  }
+  
   chooseCategory(id, category) {
     this.props.updateSides();
     let navStack = this.props.navStack;
