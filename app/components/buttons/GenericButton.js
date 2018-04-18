@@ -5,16 +5,17 @@ import { convertPrice } from '../../helpers';
 
 const { width, height } = Dimensions.get("window");
 
-export default class CartButton extends React.Component {
+export default class GenericButton extends React.Component {
   render() {
-    const { price, touchHandler, selection } = this.props;
+    const { title, touchHandler } = this.props;
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={{justifyContent:'space-between'}}>
-          <TouchableOpacity style={styles.buttonStyle}
-            onPress={() => touchHandler(selection)}
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => touchHandler()}
           >
-            <Text style={styles.textStyle}>Add To Cart {convertPrice(price)}</Text>
+            <Text style={styles.textStyle}>{title}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     padding:10,
-    backgroundColor: '#36B325',
+    backgroundColor: '#202646',
     borderRadius:5,
     minWidth: "80%"
   }

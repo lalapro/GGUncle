@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 
-import { convertPrice } from '../../helpers';
+import { convertPrice, getQuantity } from '../../helpers';
 import { QuantityControl } from '../buttons';
 
 const { width, height } = Dimensions.get("window");
@@ -11,32 +11,37 @@ const CARD_WIDTH = width - 50;
 
 export default class RelatedItemCard extends React.Component {
 
-  updateSelection(item, method) {
-    console.log(item)
+  updateSelection(side, method) {
+    let main = this.props.main;
     let obj = {
-      name: item.name,
-      price: item.price,
+      name: side.name,
+      price: side.price,
+      quantity: 1,
+      id: side.id
     }
-    this.props.touchHandler(item.id, obj, method);
+    this.props.touchHandler(main.id, obj, method, side.id);
   }
 
   render() {
-    const { title, item, itemKey, touchHandler, selection } = this.props;
+    const { title, item, itemKey, touchHandler, selection, main } = this.props;
     return (
       <View style={styles.menuCard}>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', backgroundColor: 'lightblue', width: '85%'}} >
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}} >
           <View style={{flex: 3, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={styles.text}>
-              {itemKey[item].name}
-            </Text>
-            <Text style={[styles.text, {fontSize: 14}]}>
-              ({convertPrice(itemKey[item].price)})
-            </Text>
+            <View style={{flex: 2}}>
+              <Text style={[styles.text, {textAlign: 'left'}]}>
+                {itemKey[item].name}
+              </Text>
+            </View>
+            <View style={{flex: 1}}>
+              <Text style={[styles.text, {fontSize: 14}]}>
+                ({convertPrice(itemKey[item].price)})
+              </Text>
+            </View>
           </View>
           <QuantityControl
-            id={item}
             item={itemKey[item]}
-            selection={selection}
+            quantity={getQuantity(main.id, selection, item)}
             touchHandler={this.updateSelection.bind(this)}
           />
         </View>

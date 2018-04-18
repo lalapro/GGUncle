@@ -6,6 +6,8 @@ import cart from './updateCart';
 import sides from './updateSides';
 import drinks from './updateDrinks';
 import selection from './updateSelection';
+import navStack from './updateNavStack';
+import account from './updateAccount';
 
 export default rootReducer = combineReducers({
   currentCategory,
@@ -14,5 +16,7 @@ export default rootReducer = combineReducers({
   sides,
   drinks,
   selection,
+  account,
+  navStack,
   allCategories
 })

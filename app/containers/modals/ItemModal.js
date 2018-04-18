@@ -11,7 +11,6 @@ import { addToCart, modifySelection } from '../../helpers';
 const { width, height } = Dimensions.get("window");
 
 class Item extends React.Component {
-
   updateCart(selection) {
     let cart = this.props.cart;
     cart = addToCart(selection, cart);
@@ -21,9 +20,9 @@ class Item extends React.Component {
   }
 
 
-  updateCurrentSelection(itemId, itemObj, method) {
+  updateCurrentSelection(itemId, itemObj, method, sides) {
     let selection = this.props.selection;
-    selection = modifySelection(itemId, itemObj, method, selection);
+    selection = modifySelection(itemId, itemObj, method, selection, sides);
     this.props.updateSelection(selection);
   }
 
@@ -35,8 +34,8 @@ class Item extends React.Component {
 
   render() {
     const item = this.props.currentItem;
-    const { navigation, sides, drinks, cart, selection } = this.props;
     // console.log(item)
+    const { navigation, sides, drinks, cart, selection } = this.props;
     return (
       <View style={styles.container}>
         <Image
@@ -56,6 +55,7 @@ class Item extends React.Component {
           Sides
         </Text>
         <ScrollablePage
+          main={item}
           cards={item.sides.order}
           allSides={sides}
           allDrinks={drinks}

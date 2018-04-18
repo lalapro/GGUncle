@@ -8,16 +8,15 @@ const { width, height } = Dimensions.get("window");
 export default class CartAlert extends React.Component {
   render() {
     const { cart, navigation } = this.props;
-    console.log(cart)
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'lightblue', bottom: 0, width: "100%"}}>
+      <View style={{flex: 2, justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'lightblue', bottom: 0, width: "100%", height: 50}}>
         <TouchableOpacity
-          style={{flex: 1, flexDirection: 'row', backgroundColor: 'red', width: '100%', justifyContent: 'space-around'}}
+          style={{flex: 1, flexDirection: 'row', backgroundColor: '#36B325', width: '100%', justifyContent: 'space-around', alignItems: 'center'}}
           onPress={() => navigation.navigate('Cart')}
         >
           <Text style={styles.textStyle}>{convertPrice(cart.totalPrice)}</Text>
           <Text style={styles.textStyle}>View Cart</Text>
-          <Text style={styles.textStyle}>3</Text>
+          <Text style={styles.textStyle}>{cart.totalQuantity}</Text>
         </TouchableOpacity>
       </View>
     )

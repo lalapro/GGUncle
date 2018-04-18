@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reduce from './app/reducers';
+import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
-import RootNavigator from './app/navigators/RootNavigator';
-
+import { RootNavigator, SignUpNavigator} from './app/navigators';
 
 const loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
 

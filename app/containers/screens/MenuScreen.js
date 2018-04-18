@@ -17,6 +17,10 @@ class Menu extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // console.log(this.props.navStack)
+  }
+
   chooseItem(item) {
     if (this.props.currentItem.id !== item.id) {
       this.props.updateCurrentItem(item);
@@ -29,8 +33,12 @@ class Menu extends React.Component {
     this.setState({ itemSelected:false })
   }
 
-  componentDidMount() {
-    // setTimeout(() => {console.log('drinks...', this.props.drinks, 'oyoyoyo')}, 1000)
+  back() {
+    console.log('PARETN is this triggign?')
+    let navStack = this.props.navStack;
+    navStack.pop();
+    this.props.updateNavigationStack(navStack);
+    this.props.navigation.navigate(navStack[navStack.length - 1]);
   }
 
   render() {
@@ -40,7 +48,7 @@ class Menu extends React.Component {
     let { cart } = this.props;
     return (
       <View style={styles.container}>
-        <Banner title={category} navigation={navigation}/>
+        <Banner title={category} back={this.back.bind(this)}/>
         <ScrollablePage
           cards={mains}
           cardStyle="Menu"
@@ -67,6 +75,7 @@ class Menu extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
   updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
+  updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack))
 })
 
 export default connect((store) => {
@@ -74,7 +83,8 @@ export default connect((store) => {
     currentCategory: store.currentCategory,
     drinks: store.drinks,
     currentItem: store.currentItem,
-    cart: store.cart
+    cart: store.cart,
+    navStack: store.navStack
   }
 }, mapDispatchToProps)(Menu)
 

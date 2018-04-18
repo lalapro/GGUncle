@@ -28,6 +28,7 @@ export default class ScrollablePage extends React.Component {
     } else if (cardStyle === 'RelatedItem') {
       return (
         <RelatedItemCard
+          main={this.props.main}
           title={this.props.title}
           item={card}
           selection={this.props.selection}
@@ -40,6 +41,7 @@ export default class ScrollablePage extends React.Component {
       return (
         <CartCard
           item={card}
+          touchHandler={this.props.touchHandler}
           key={card.name}
         />
       )

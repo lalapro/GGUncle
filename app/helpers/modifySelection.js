@@ -1,28 +1,48 @@
-let modifySelection = (itemId, itemObj, method, selection) => {
+let modifySelection = (itemId, itemObj, method, selection, sideId) => {
+  let main = selection.items[itemId];
   if (method === 'Add') {
-    if (selection.items[itemId] === undefined) {
-      itemObj['quantity'] = 1;
+    if (main === undefined) {
       selection.items[itemId] = itemObj;
       selection.totalPrice += itemObj.price;
+      selection.items[itemId].sides = {};
     } else {
-      let price = selection.items[itemId].price;
-      selection.items[itemId].quantity++;
-      // selection.items[itemId].price += price;
-      selection.totalPrice += price;
+      let price = main.price;
+      if (sideId) {
+        if (main.sides[sideId]) {
+          main.sides[sideId].quantity++;
+        } else {
+          main.sides[sideId] = itemObj;
+        }
+        selection.totalPrice += main.sides[sideId].price;
+      } else {
+        main.quantity++;
+        selection.totalPrice += price;
+      }
     }
   } else if (method === 'Remove') {
-    let item = selection.items[itemId];
-    if (item) {
-      if (item.quantity >= 1) {
-        let price = item.price;
-        item.quantity--;
-        if (item.quantity === 0) {
-          delete selection.items[itemId];
+    if (main) {
+      if (sideId) {
+        if (main.sides[sideId]) {
+          let sidePrice = main.sides[sideId].price;
+          main.sides[sideId].quantity--;
+          if (main.sides[sideId].quantity === 0) {
+            delete main.sides[sideId];
+          }
+          selection.totalPrice -= sidePrice;
         }
-        selection.totalPrice -= price;
+      } else {
+        if (main.quantity >= 1) {
+          let price = main.price;
+          main.quantity--;
+          if (main.quantity === 0) {
+            delete selection.items[itemId];
+          }
+          selection.totalPrice -= price;
+        }
       }
     }
   }
+  // console.log(selection)
   return selection;
 }
 

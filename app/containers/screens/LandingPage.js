@@ -1,40 +1,157 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Modal, Dimensions, TextInput, TouchableOpacity, Keyboard, AsyncStorage } from 'react-native';
 import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 
-import { Banner } from '../../components';
+import { Banner, LandingPageButtons } from '../../components';
+import { SignUpModal } from '../modals';
+
+import SignUpNavigator from '../../navigators/SignUpNavigator'
 
 const { width, height } = Dimensions.get("window");
 
+const USERREF = database.users;
+
 class LandingPage extends React.Component {
-
-  componentDidMount() {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      signUpModal: false,
+      loginModal: false,
+      phone: '',
+      password: '',
+      notFound: false
+    }
   }
 
-  navigateToHomeScreen() {
-    this.props.navigation.navigate('Home');
+  close() {
+    this.setState({
+      signUpModal: false,
+      loginModal: false
+    })
   }
+
+  async componentDidMount() {
+    let phone = await AsyncStorage.getItem('user');
+    if (phone) {
+      this.navigateToHomeScreen(phone);
+    }
+  }
+
+  showModal(modal) {
+    if (modal === 'SignUp') {
+      this.setState({signUpModal: true});
+    } else if (modal === 'Login') {
+      let phone = this.state.phone
+      if (phone.length !== 10) {
+        this.setState({notFound: true})
+      } else {
+        USERREF.child(phone).once('value', snap => {
+          if (snap.val()) {
+            if (snap.val() === this.state.password) {
+              AsyncStorage.setItem('user', phone)
+              this.navigateToHomeScreen(phone);
+            }
+          } else {
+            this.setState({notFound: true})
+          }
+        })
+      }
+    }
+  }
+
+
+  navigateToHomeScreen(phone) {
+    this.props.getAllCategories().then(res => {
+      this.props.updateNavigationStack(['Home']);
+      this.props.updateAccount({
+        phone: phone,
+        login: true
+      })
+      this.props.navigation.navigate('Home');
+    });
+  }
+
+  focus(field) {
+    this.refs[field].focus();
+  }
+
+
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Image resizeMode="contain" style={{width: 100, position: 'absolute', zIndex: 10}} source={require('../../assets/van.png')}/>
+        <Image resizeMode="contain" style={{width: 100, position: 'absolute', zIndex: 10, top: 50}} source={require('../../assets/van.png')}/>
         <Banner title={"Eat the Dream. On Demand."}/>
-        <View style={{flex: 1, justifyContent: 'flex-end', backgroundColor: 'black', width: "100%"}}>
+        <View style={{flex: 3, backgroundColor: 'black', width: '70%', alignItems: 'flex-start'}}>
           <TouchableOpacity
-            style={styles.buttonStyle}
+            onPress={() => this.focus("phone")}
+            style={{width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}
           >
-            <Text style={styles.textStyle}>Login</Text>
+            <Image
+              source={require('../../assets/phone.png')}
+              style={{width: 30, height: 40}}
+              resizeMode={'contain'}
+            />
+            <TextInput
+              style={{
+                color: 'white',
+                width: "100%",
+                fontWeight: 'bold',
+              }}
+              placeholder={"Phone Number"}
+              onChangeText={(phone) => this.setState({phone})}
+              value={this.state.phone}
+              keyboardType={"phone-pad"}
+              placeholderTextColor={"white"}
+              onSubmitEditing={Keyboard.dismiss}
+              ref={"phone"}
+            />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.buttonStyle}
-          >
-            <Text style={styles.textStyle}>SignUp</Text>
+            onPress={() => this.focus("password")}
+            style={{width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+            <Image
+              source={require('../../assets/password.png')}
+              style={{width: 30, height: 40}}
+              resizeMode={'contain'}
+            />
+            <TextInput
+              style={{
+                color: 'white',
+                width: "100%",
+                fontWeight: 'bold',
+              }}
+              placeholder={"Password"}
+              onChangeText={(password) => this.setState({password})}
+              value={this.state.password}
+              autoCapitalize={"none"}
+              placeholderTextColor={"white"}
+              onSubmitEditing={Keyboard.dismiss}
+              ref={"password"}
+            />
           </TouchableOpacity>
+          {this.state.notFound ? (
+            <View style={{width: '100%'}}>
+              <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
+                Login credentials are incorrect!
+              </Text>
+            </View>
+          ) : (null)}
         </View>
+        <LandingPageButtons touchHandler={this.showModal.bind(this)}/>
+        <Modal
+          visible={this.state.signUpModal}
+          animationType="slide"
+          transparent={false}
+        >
+          <SignUpNavigator screenProps={{
+            close: this.close.bind(this),
+            navigation: navigation
+          }}/>
+        </Modal>
       </View>
     )
   }
@@ -42,15 +159,22 @@ class LandingPage extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  updateMenu: (menu) => dispatch(actions.menuUpdate(menu))
+  getAllCategories: (categories) => dispatch(actions.getAllCategories(categories)),
+  updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack)),
+  updateAccount: (account) => dispatch(actions.updateAccount(account))
 })
 
-export default connect(null, mapDispatchToProps)(LandingPage)
+export default connect((store) => {
+  return {
+    allCategories: store.allCategories,
+    account: store.account
+  }
+}, mapDispatchToProps)(LandingPage)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -64,7 +188,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize:20,
-    color: '#ffffff',
+    margin: 10,
+    fontWeight: 'bold',
+    color: 'white',
     textAlign: 'center'
   },
 });

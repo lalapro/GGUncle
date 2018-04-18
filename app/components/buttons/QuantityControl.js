@@ -7,25 +7,17 @@ const { width, height } = Dimensions.get("window");
 
 export default class QuantityControl extends React.Component {
 
-  getQuantity() {
-    if (this.props.selection.items[this.props.id]) {
-      return this.props.selection.items[this.props.id].quantity;
-    } else {
-      return 0
-    }
-  }
-
   render() {
-    const { touchHandler, item, quantity } = this.props;
+    const { quantity, item, touchHandler } = this.props;
     return (
-      <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'red', width: '100%', justifyContent: 'center'}}>
+      <View style={{flex: 1, flexDirection: 'row', width: '100%', justifyContent: 'flex-start', alignItems: 'center', left: 20}}>
         <TouchableOpacity onPress={() => touchHandler(item, 'Remove')}>
           <Text style={styles.textStyle}>
             -
           </Text>
         </TouchableOpacity>
         <Text style={{marginLeft: 10, marginRight: 10}}>
-          {this.getQuantity()}
+          {quantity}
         </Text>
         <TouchableOpacity onPress={() => touchHandler(item, 'Add')}>
           <Text style={styles.textStyle}>
@@ -39,9 +31,10 @@ export default class QuantityControl extends React.Component {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize:20,
-    color: '#ffffff',
-    textAlign: 'center'
+    fontSize:25,
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   buttonStyle: {
     padding:10,

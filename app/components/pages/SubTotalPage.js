@@ -12,27 +12,24 @@ const CARD_WIDTH = width / 2;
 export default class SubTotalPage extends React.Component {
 
   render() {
+    let { subTotal, tax, grandTotal} = this.props;
     return (
-      <View style={{flex: 4, justifyContent: 'space-between', alignItems: 'center', backgroundColor:'lightgreen', width: "100%"}}>
+      <View style={{flex: 2, justifyContent: 'space-around', alignItems: 'center', width: "100%"}}>
         <View style={styles.column}>
           <Text>Subtotal</Text>
-          <Text>$100</Text>
+          <Text>{convertPrice(subTotal)}</Text>
         </View>
         <View style={styles.column}>
-          <Text>Promo Credits</Text>
-          <Text>$10</Text>
-        </View>
-        <View style={styles.column}>
-          <Text>Tax</Text>
-          <Text>15%</Text>
+          <Text>Tax (15%)</Text>
+          <Text>{convertPrice(tax)}</Text>
         </View>
         <View style={styles.column}>
           <Text>Delivery</Text>
           <Text>$5.00</Text>
         </View>
         <View style={styles.column}>
-          <Text>Tip</Text>
-          <Text>13%</Text>
+          <Text>Grand Total</Text>
+          <Text>{convertPrice(grandTotal)}</Text>
         </View>
       </View>
     )

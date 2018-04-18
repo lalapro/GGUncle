@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import actions from '../actions';
 
 
-import { LandingPage, HomeScreen, MenuScreen, CartScreen } from '../containers';
+import { LoadingPage, LandingPage, HomeScreen, MenuScreen, CartScreen } from '../containers';
+import SignUpNavigator from './SignUpNavigator';
 
 
 
@@ -18,10 +19,9 @@ const IMAGES = [
 
 
 const CustomTabView = ({ router, navigation }) => {
-  // console.log(this.props)
   const { routes, index } = navigation.state;
   const ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
-  if (routes[index].routeName === 'LandingPage') {
+  if (routes[index].routeName === 'LandingPage' || routes[index].routeName === 'LoadingPage') {
     return (
       <View style={{flex: 1}}>
         <ActiveScreen
@@ -63,6 +63,10 @@ const CustomTabView = ({ router, navigation }) => {
 
 const CustomTabRouter = TabRouter(
   {
+    LoadingPage: {
+      screen: LoadingPage,
+      path: 'LoadingPage'
+    },
     LandingPage: {
       screen: LandingPage,
       path: 'LandingPage',

@@ -12,37 +12,33 @@ import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../component
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      categories: []
-    }
   }
 
   componentDidMount() {
-    this.props.getAllCategories().then(res => {
-      let categories = Object.values(this.props.allCategories)
-      this.setState({categories})
-    });
+
   }
 
   chooseCategory(id, category) {
     this.props.updateSides();
-    this.props.updateDrinks();
-    this.props.updateCurrentCategory(id)
-    .then(mains => this.props.navigation.navigate('Menu'));
+    let navStack = this.props.navStack;
+    navStack.push('Menu');
+    this.props.updateNavigationStack(navStack);
+    this.props.updateCurrentCategory(id).then(mains => this.props.navigation.navigate('Menu'));
 
   }
 
-  goBack() {
-    this.props.navigation.goBack();
+  back() {
+    this.props.navigation.navigate('Home');
   }
 
   render() {
-    const { cart, navigation } = this.props;
+    let { cart, allCategories, navigation } = this.props;
+    allCategories = Object.values(allCategories);
     return (
       <View style={styles.container}>
         <Banner title={"All Categories"}/>
         <ScrollablePage
-          cards={this.state.categories}
+          cards={allCategories}
           cardStyle="Category"
           clickHandler={this.chooseCategory.bind(this)}
         />
@@ -58,13 +54,14 @@ const mapDispatchToProps = (dispatch) => ({
   updateCurrentCategory: (id) => dispatch(actions.updateCurrentCategory(id)),
   getAllCategories: (categories) => dispatch(actions.getAllCategories(categories)),
   updateSides: () => dispatch(actions.updateSides()),
-  updateDrinks: () => dispatch(actions.updateDrinks())
+  updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack))
 })
 
 export default connect((store)=>{
   return {
     allCategories: store.allCategories,
-    cart: store.cart
+    cart: store.cart,
+    navStack: store.navStack,
   }
   }, mapDispatchToProps)(Home)
 
