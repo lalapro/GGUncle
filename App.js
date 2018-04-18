@@ -1,26 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reduce from './app/reducers';
 
-import RootNavigator from './app/screens/RootNavigator'
+import { RootNavigator, SignUpNavigator} from './app/navigators';
 
-const loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
+let loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
 
 function configureStore(initialState) {
-  const enhancer = compose(
+  let enhancer = compose(
     applyMiddleware(
       thunkMiddleware,
-      loggerMiddleware,
+      // loggerMiddleware,
     ),
   );
   return createStore(reduce, initialState, enhancer);
 }
 
-const store = configureStore({});
+let store = configureStore({});
 
 
 export default class App extends React.Component {
@@ -33,7 +33,7 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
