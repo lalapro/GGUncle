@@ -42,7 +42,7 @@ then `npm run android`
 ## Screenshots
 
 <div style="width:100%">
-  <img src="https://i.imgur.com/ttJK9z3.gif" width="20%"/>
+  <img src="https://i.imgur.com/WBv4dxA.gifv" width="20%"/>
   <img src="https://i.imgur.com/VjVbbLk.png" width="20%"/>
   <img src="https://i.imgur.com/HO6lgEk.png" width="20%"/>
   <img src="https://i.imgur.com/ZHlDOzp.png" width="20%"/>
