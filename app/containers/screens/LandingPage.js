@@ -6,6 +6,7 @@ import genericStyles from '../styles';
 import { Banner, LandingPageButtons } from '../../components';
 import { SignUpNavigator } from '../../navigators';
 import { database } from '../../firebase';
+import updateMenu from '../../../microservice/updateMenu'
 const USERREF = database.users;
 
 
@@ -29,6 +30,7 @@ class LandingPage extends React.Component {
   }
 
   async componentDidMount() {
+    updateMenu();
     let phone = await AsyncStorage.getItem('user');
     if (phone) {
       this.navigateToHomeScreen(phone);
@@ -187,7 +189,7 @@ let spStyles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-    width: "100%",
+    width: "80%",
     fontWeight: 'bold',
     textAlign: 'center'
   },

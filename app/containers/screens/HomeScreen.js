@@ -6,9 +6,8 @@ import genericStyles from '../styles';
 import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../components';
 
 
-
+console.disableYellowBox = true;
 class Home extends React.Component {
-
   chooseCategory(id, category) {
     this.props.updateSides();
     let navStack = this.props.navStack;
