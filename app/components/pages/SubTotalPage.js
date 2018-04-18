@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
 import { convertPrice, limitCharacters } from '../../helpers';
 
-const { width, height } = Dimensions.get("window");
+const { WIDTH, HEIGHT } = Dimensions.get("window");
 
-const CARD_HEIGHT = height / 5;
-const CARD_WIDTH = width / 2;
 
 
 export default class SubTotalPage extends React.Component {
@@ -36,7 +33,11 @@ export default class SubTotalPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+
+const CARD_HEIGHT = HEIGHT / 5;
+const CARD_WIDTH = WIDTH / 2;
+
+let styles = StyleSheet.create({
   itemCard: {
     padding: 3,
     width: CARD_WIDTH,

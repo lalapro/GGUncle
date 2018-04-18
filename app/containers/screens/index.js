@@ -1,15 +1,5 @@
-import LandingPage from './LandingPage';
-import HomeScreen from './HomeScreen';
-import MenuScreen from './MenuScreen';
-import CartScreen from './CartScreen';
-import LoadingPage from './LoadingPage';
-
-
-
-module.exports = {
-  LoadingPage,
-  LandingPage,
-  HomeScreen,
-  MenuScreen,
-  CartScreen,
-}
+export { default as LandingPage } from './LandingPage';
+export { default as HomeScreen } from './HomeScreen';
+export { default as MenuScreen } from './MenuScreen';
+export { default as CartScreen } from './CartScreen';
+export { default as AccountScreen } from './AccountScreen';

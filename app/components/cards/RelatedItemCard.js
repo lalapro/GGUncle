@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'rea
 import { convertPrice, getQuantity } from '../../helpers';
 import { QuantityControl } from '../buttons';
 
-const { width, height } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 6;
 const CARD_WIDTH = width - 50;
@@ -23,7 +23,7 @@ export default class RelatedItemCard extends React.Component {
   }
 
   render() {
-    const { title, item, itemKey, touchHandler, selection, main } = this.props;
+    let { title, item, itemKey, touchHandler, selection, main } = this.props;
     return (
       <View style={styles.menuCard}>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}} >
@@ -50,7 +50,7 @@ export default class RelatedItemCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   menuCard: {
     flex: 1,
     justifyContent: 'center',

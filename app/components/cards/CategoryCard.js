@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'rea
 
 
 
-const { width, height } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
-const CARD_HEIGHT = height / 6;
-const CARD_WIDTH = width / 2 - 20;
+let CARD_HEIGHT = height / 6;
+let CARD_WIDTH = width / 2 - 20;
 
 export default class CategoryCard extends React.Component {
   render() {
@@ -30,7 +30,7 @@ export default class CategoryCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

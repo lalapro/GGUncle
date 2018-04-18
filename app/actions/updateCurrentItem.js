@@ -1,7 +1,3 @@
-import { database } from '../firebase';
-
-
-
 function actionCreator(item) {
   return {
     type: 'UPDATE_CURRENT_ITEM',

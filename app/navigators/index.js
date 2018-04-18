@@ -1,7 +1,2 @@
-import RootNavigator from './RootNavigator';
-import SignUpNavigator from './SignUpNavigator';
-
-module.exports = {
-  RootNavigator,
-  SignUpNavigator
-}
+export { default as RootNavigator } from './RootNavigator';
+export { default as SignUpNavigator } from './SignUpNavigator';

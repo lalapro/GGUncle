@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import fakeData from '../fakeData';
-
 import { Banner, CategoryCard, ScrollablePage, CartAlert } from '../../components';
 
 
@@ -50,7 +47,7 @@ class Home extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   updateCurrentCategory: (id) => dispatch(actions.updateCurrentCategory(id)),
   getAllCategories: (categories) => dispatch(actions.getAllCategories(categories)),
   updateSides: () => dispatch(actions.updateSides()),
@@ -65,7 +62,7 @@ export default connect((store)=>{
   }
   }, mapDispatchToProps)(Home)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

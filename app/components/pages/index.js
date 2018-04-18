@@ -1,9 +1,4 @@
-import ItemPage from './ItemPage';
-import ScrollablePage from './ScrollablePage';
-import SubTotalPage from './SubTotalPage';
-
-module.exports = {
-  ItemPage,
-  ScrollablePage,
-  SubTotalPage,
-}
+export { default as ItemPage } from './ItemPage';
+export { default as ScrollablePage } from './ScrollablePage';
+export { default as SubTotalPage } from './SubTotalPage';
+export { default as TextView } from './TextView';

@@ -1,17 +1,7 @@
-import convertPrice from './convertPrice';
-import limitCharacters from './limitCharacters';
-import createItemHash from './createItemHash';
-import addToCart from './addToCart';
-import editCart from './editCart';
-import modifySelection from './modifySelection';
-import getQuantity from './getQuantity';
-
-module.exports = {
-  limitCharacters,
-  createItemHash,
-  convertPrice,
-  addToCart,
-  editCart,
-  modifySelection,
-  getQuantity
-}
+export { default as convertPrice } from './convertPrice';
+export { default as limitCharacters } from './limitCharacters';
+export { default as createItemHash } from './createItemHash';
+export { default as addToCart } from './addToCart';
+export { default as editCart } from './editCart';
+export { default as modifySelection } from './modifySelection';
+export { default as getQuantity } from './getQuantity';

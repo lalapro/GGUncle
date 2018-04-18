@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import Modal from 'react-native-modal'
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-
-
 import { Banner, ScrollablePage, SubTotalPage } from '../../components';
 import { EditModal } from '../modals';
+
 
 
 class Cart extends React.Component {
@@ -84,7 +82,7 @@ class Cart extends React.Component {
 
 
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
   updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack))
 })
@@ -96,7 +94,7 @@ export default connect((store) => {
   }
 }, mapDispatchToProps)(Cart)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

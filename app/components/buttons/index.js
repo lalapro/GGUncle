@@ -1,13 +1,4 @@
-import CartButton from './CartButton';
-import CartAlert from './CartAlert';
-import QuantityControl from './QuantityControl';
-import GenericButton from './GenericButton';
-import LandingPageButtons from './LandingPageButtons';
-
-module.exports = {
-  CartButton,
-  CartAlert,
-  QuantityControl,
-  GenericButton,
-  LandingPageButtons
-}
+export { default as CartAlert } from './CartAlert';
+export { default as QuantityControl } from './QuantityControl';
+export { default as GenericButton } from './GenericButton';
+export { default as LandingPageButtons } from './LandingPageButtons';

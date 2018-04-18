@@ -1,28 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get("window");
-
+import { StyleSheet, Text, View, Image } from 'react-native';
+import genericStyles from './styles.js';
 import { convertPrice } from '../../helpers';
-
-const CARD_HEIGHT = height / 6;
-const CARD_WIDTH = width - 50;
-
 
 export default class BulletPointCard extends React.Component {
   render() {
     let { item } = this.props;
     if (item.quantity > 0) {
       return (
-        <View style={styles.bulletPoint}>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{color: 'white', fontSize: 12}}>0</Text>
+        <View style={spStyles.container}>
+          <View style={genericStyles.flexContainer}>
+            <Text style={[spStyles.text, { color: 'white' }]}> 0 </Text>
           </View>
-          <View style={{flex:3, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{width: '100%', textAlign: 'left', left: 10, fontSize: 12}}> • {item.name} (x{item.quantity})</Text>
+          <View style={[genericStyles.flexContainer, { flex: 3 }]}>
+            <Text style={[spStyles.text, { width: '100%' }]}> • {item.name} (x{item.quantity}) </Text>
           </View>
-          <View style={{flex:1, justifyContent: 'center', alignItems: 'flex-end'}}>
-            <Text style={{textAlign: 'right'}}>{convertPrice(item.price * item.quantity)}</Text>
+          <View style={[genericStyles.flexContainer, { alignItems: 'flex-end' }]}>
+            <Text style={{textAlign: 'right'}}> {convertPrice(item.price * item.quantity)} </Text>
           </View>
         </View>
       )
@@ -32,8 +26,8 @@ export default class BulletPointCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  bulletPoint: {
+let spStyles = StyleSheet.create({
+  container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -42,6 +36,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    textAlign: 'center'
+    fontSize: 12,
+    textAlign: 'left',
+    left: 10,
   }
 });

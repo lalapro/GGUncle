@@ -1,17 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal, Dimensions, TextInput, TouchableOpacity, Keyboard, AsyncStorage } from 'react-native';
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-
 import { Banner, LandingPageButtons } from '../../components';
-import { SignUpModal } from '../modals';
-
-import SignUpNavigator from '../../navigators/SignUpNavigator'
-
-const { width, height } = Dimensions.get("window");
-
+import { SignUpNavigator } from '../../navigators';
+import { database } from '../../firebase';
 const USERREF = database.users;
+
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -80,7 +75,7 @@ class LandingPage extends React.Component {
 
 
   render() {
-    const { navigation } = this.props;
+    let { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Image resizeMode="contain" style={{width: 100, position: 'absolute', zIndex: 10, top: 50}} source={require('../../assets/van.png')}/>
@@ -158,7 +153,7 @@ class LandingPage extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   getAllCategories: (categories) => dispatch(actions.getAllCategories(categories)),
   updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack)),
   updateAccount: (account) => dispatch(actions.updateAccount(account))
@@ -171,7 +166,7 @@ export default connect((store) => {
   }
 }, mapDispatchToProps)(LandingPage)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',

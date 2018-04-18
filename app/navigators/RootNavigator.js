@@ -3,14 +3,13 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { createNavigator, createNavigationContainer, TabRouter, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
 import actions from '../actions';
-
-
-import { LoadingPage, LandingPage, HomeScreen, MenuScreen, CartScreen } from '../containers';
+import { LandingPage, HomeScreen, MenuScreen, CartScreen, AccountScreen } from '../containers';
+console.log('whatup', LandingPage)
 import SignUpNavigator from './SignUpNavigator';
 
 
 
-const IMAGES = [
+let IMAGES = [
   ['Home', require('../assets/home.png')],
   ['Search', require('../assets/search.png')],
   ['Cart', require('../assets/cart.png')],
@@ -18,9 +17,9 @@ const IMAGES = [
 ]
 
 
-const CustomTabView = ({ router, navigation }) => {
-  const { routes, index } = navigation.state;
-  const ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
+let CustomTabView = ({ router, navigation }) => {
+  let { routes, index } = navigation.state;
+  let ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
   if (routes[index].routeName === 'LandingPage' || routes[index].routeName === 'LoadingPage') {
     return (
       <View style={{flex: 1}}>
@@ -61,12 +60,8 @@ const CustomTabView = ({ router, navigation }) => {
   }
 };
 
-const CustomTabRouter = TabRouter(
+let CustomTabRouter = TabRouter(
   {
-    LoadingPage: {
-      screen: LoadingPage,
-      path: 'LoadingPage'
-    },
     LandingPage: {
       screen: LandingPage,
       path: 'LandingPage',
@@ -82,6 +77,10 @@ const CustomTabRouter = TabRouter(
     Cart: {
       screen: CartScreen,
       path: 'Cart'
+    },
+    Account: {
+      screen: AccountScreen,
+      path: 'Account'
     }
   },
   {
@@ -90,26 +89,15 @@ const CustomTabRouter = TabRouter(
 );
 
 
-const CustomTabs = createNavigationContainer(
+let CustomTabs = createNavigationContainer(
   createNavigator(CustomTabRouter)(CustomTabView)
 );
 
-
-const mapDispatchToProps = (dispatch) => ({
-  updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
-  updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
-})
-
-export default connect((store) => {
-  return {
-    cart: store.cart
-  }
-}, mapDispatchToProps)(CustomTabs)
+export default CustomTabs
 
 
 
-
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   tabNavigator: {
     flex: 1,
     flexDirection: 'row',

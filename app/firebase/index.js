@@ -12,4 +12,4 @@ database.users = firebase.database().ref('/Users');
 module.exports = {
   fire,
   database
-};
+}

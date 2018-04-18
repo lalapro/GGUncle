@@ -9,10 +9,10 @@ import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } fro
 
 import { RootNavigator, SignUpNavigator} from './app/navigators';
 
-const loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
+let loggerMiddleware = createLogger({ predcate: (getState, action) => __DEV__});
 
 function configureStore(initialState) {
-  const enhancer = compose(
+  let enhancer = compose(
     applyMiddleware(
       thunkMiddleware,
       // loggerMiddleware,
@@ -21,7 +21,7 @@ function configureStore(initialState) {
   return createStore(reduce, initialState, enhancer);
 }
 
-const store = configureStore({});
+let store = configureStore({});
 
 
 export default class App extends React.Component {
@@ -34,7 +34,7 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

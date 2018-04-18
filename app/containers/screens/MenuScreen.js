@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Modal } from 'react-native';
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-
-
 import { Banner, ScrollablePage, CartAlert } from '../../components';
 import { ItemModal } from '../modals';
 
@@ -72,7 +69,7 @@ class Menu extends React.Component {
 
 
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   updateCurrentItem: (item) => dispatch(actions.updateCurrentItem(item)),
   updateSelection: (selection) => dispatch(actions.updateSelection(selection)),
   updateNavigationStack: (stack) => dispatch(actions.updateNavigationStack(stack))
@@ -81,14 +78,13 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect((store) => {
   return {
     currentCategory: store.currentCategory,
-    drinks: store.drinks,
     currentItem: store.currentItem,
     cart: store.cart,
     navStack: store.navStack
   }
 }, mapDispatchToProps)(Menu)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

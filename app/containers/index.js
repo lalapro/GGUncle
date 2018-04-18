@@ -1,13 +1,15 @@
-import { LandingPage, HomeScreen, MenuScreen, CartScreen, LoadingPage } from './screens'
-import { ItemModal, SignUpModal, EditModal } from './modals'
+export * from './screens'
+export * from './modals'
 
-module.exports = {
-  LoadingPage,
-  LandingPage,
-  ItemModal,
-  HomeScreen,
-  MenuScreen,
-  CartScreen,
-  SignUpModal,
-  EditModal
-}
+// const CONTAINERS = {
+//   LoadingPage,
+//   LandingPage,
+//   ItemModal,
+//   HomeScreen,
+//   MenuScreen,
+//   CartScreen,
+//   AccountScreen,
+//   EditModal
+// }
+//
+// export default CONTAINERS;

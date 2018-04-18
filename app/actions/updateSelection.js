@@ -1,7 +1,3 @@
-import { database } from '../firebase';
-
-
-
 function actionCreator(selection) {
   return {
     type: 'UPDATE_SELECTION',

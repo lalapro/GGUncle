@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import genericStyles from './styles.js';
 import { convertPrice } from '../../helpers';
-
-const { width, height } = Dimensions.get("window");
 
 export default class GenericButton extends React.Component {
   render() {
-    const { title, touchHandler } = this.props;
+    let { title, touchHandler, color } = this.props;
+    color = color || '#202646';
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={spStyles.container}>
         <View style={{justifyContent:'space-between'}}>
           <TouchableOpacity
-            style={styles.buttonStyle}
+            style={[spStyles.button, { backgroundColor: color }]}
             onPress={() => touchHandler()}
           >
-            <Text style={styles.textStyle}>{title}</Text>
+            <Text style={genericStyles.text}> {title} </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -23,13 +22,13 @@ export default class GenericButton extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  textStyle: {
-    fontSize:20,
-    color: '#ffffff',
-    textAlign: 'center'
+let spStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  buttonStyle: {
+  button: {
     padding:10,
     backgroundColor: '#202646',
     borderRadius:5,

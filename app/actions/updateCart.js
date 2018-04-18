@@ -1,7 +1,3 @@
-import { database } from '../firebase';
-
-
-
 function actionCreator(cart) {
   return {
     type: 'UPDATE_CART',

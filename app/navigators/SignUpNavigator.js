@@ -7,9 +7,9 @@ import { database } from '../firebase';
 import { Banner, GenericButton } from '../components'
 
 
-const { width, height } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
-const USERREF = database.users;
+let USERREF = database.users;
 
 class Phone extends React.Component {
   constructor(props) {
@@ -38,36 +38,34 @@ class Phone extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 9, alignItems: 'center'}}>
-          <View style={{flex: 1, justifyContent: 'flex-start'}}>
-            <Text style={styles.textStyle}>
-              Please Enter Your Phone Number:
+        <View style={{flex: 1, justifyContent: 'flex-start'}}>
+          <Text style={styles.textStyle}>
+            Please Enter Your Phone Number:
+          </Text>
+          <TextInput
+            style={{
+              color: 'white',
+              width: "100%",
+              fontWeight: 'bold',
+              marginLeft: width/2,
+              marginRight: width/2
+            }}
+            keyboardType={'phone-pad'}
+            onChangeText={(phone) => this.setState({phone})}
+            value={this.state.phone}
+            autoFocus={true}
+          />
+        </View>
+        {this.state.found ? (
+          <View>
+            <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
+              You've already signed up!!
             </Text>
-            <TextInput
-              style={{
-                color: 'white',
-                width: "100%",
-                fontWeight: 'bold',
-                marginLeft: width/2,
-                marginRight: width/2
-              }}
-              keyboardType={'phone-pad'}
-              onChangeText={(phone) => this.setState({phone})}
-              value={this.state.phone}
-              autoFocus={true}
-            />
           </View>
-          {this.state.found ? (
-            <View>
-              <Text style={[styles.textStyle, {color: 'red', marginBottom: 15}]}>
-                You've already signed up!!
-              </Text>
-            </View>
-          ) : (null)}
-          <View style={{flex: 8, flexDirection: 'row', alignItems: 'flex-start'}}>
-            <GenericButton title={"Back"} touchHandler={this.back.bind(this)}/>
-            <GenericButton title={"Confirm"} touchHandler={this.confirmSignUp.bind(this)}/>
-          </View>
+        ) : (null)}
+        <View style={{flex: 3, flexDirection: 'row', alignItems: 'flex-start'}}>
+          <GenericButton title={"Back"} touchHandler={this.back.bind(this)}/>
+          <GenericButton title={"Confirm"} touchHandler={this.confirmSignUp.bind(this)}/>
         </View>
       </View>
     )
@@ -129,7 +127,7 @@ class Password extends React.Component {
 
 
 
-const SignUpNavigator = StackNavigator(
+let SignUpNavigator = StackNavigator(
   {
     Phone: { screen: Phone },
     Password: { screen: Password }
@@ -144,7 +142,7 @@ const SignUpNavigator = StackNavigator(
 export default SignUpNavigator
 
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',

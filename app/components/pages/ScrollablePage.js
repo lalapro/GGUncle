@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-
-import { CategoryCard, MenuCard, RelatedItemCard, CartCard } from '../cards';
 import ItemPage from './ItemPage'
-import { CartButton } from '../buttons';
+import { CategoryCard, MenuCard, RelatedItemCard, CartCard } from '../cards';
+import { CartButton } from '../buttons'
 
+// console.log(x)
 
 
 export default class ScrollablePage extends React.Component {
@@ -49,8 +49,8 @@ export default class ScrollablePage extends React.Component {
   }
 
   render() {
-    const flex = this.props.flex || 8;
-    const direction = this.props.direction || 'row';
+    let flex = this.props.flex || 8;
+    let direction = this.props.direction || 'row';
     return (
       <View style={[styles.content, {flex: this.props.flex || 8}]}>
         <ScrollView
@@ -66,7 +66,7 @@ export default class ScrollablePage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   content: {
     flex: 8,
     // backgroundColor: 'lightblue',

@@ -1,11 +1,11 @@
 import { database } from '../firebase';
-import { createItemHash } from '../helpers';
+import { createItemHash } from '../components';
 
 const SIDESREF = database.menuItems.child('digestData').child('sides');
 
 
 async function getAllSides() {
-  let SIDES = await createItemHash(SIDESREF);
+  const SIDES = await createItemHash(SIDESREF);
   return SIDES;
 }
 

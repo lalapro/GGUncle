@@ -1,41 +1,45 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Modal, TouchableOpacity, Dimensions } from 'react-native';
-
+import genericStyles from './styles';
 import BulletPointCard from './BulletPointCard';
-
-const { width, height } = Dimensions.get("window");
-
+import { TextView } from '../pages';
 import { convertPrice } from '../../helpers';
-
-const CARD_HEIGHT = height / 6;
-const CARD_WIDTH = width - 50;
-
+let { WIDTH, HEIGHT } = Dimensions.get("window");
 
 export default class CartCard extends React.Component {
   render() {
     let { item, touchHandler } = this.props;
     let sides = Object.values(item.sides);
     return (
-      <View style={styles.menuCard}>
+      <View style={spStyles.menuCard}>
         <TouchableOpacity onPress={() => touchHandler(item)}>
-          <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', width: '100%'}}>
+          <View style={spStyles.container}>
             <Image
               source={require('../../assets/edit.png')}
               style={{width: 20, height: 20}}
               resizeMode={"contain"}
             />
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <Text>{item.quantity}</Text>
-            </View>
-            <View style={{flex:4, justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={{width: '100%', textAlign: 'left'}}>{item.name}</Text>
-            </View>
-            <View style={{flex:1, justifyContent: 'center', alignItems: 'flex-end'}}>
-              <Text style={{textAlign: 'right'}}>{convertPrice(item.price * item.quantity)}</Text>
-            </View>
+            <TextView
+              viewStyle={genericStyles.flexContainer}
+              textStyle={genericStyles.text}
+              text={item.quantity}
+            />
+            <TextView
+              viewStyle={[genericStyles.flexContainer, { flex: 4 }]}
+              textStyle={[genericStyles.text, { width: '100%', textAlign: 'left' }]}
+              text={item.name}
+            />
+            <TextView
+              viewStyle={genericStyles.flexContainer}
+              textStyle={[genericStyles.text, { textAlign: 'right' }]}
+              text={convertPrice(item.price * item.quantity)}
+            />
           </View>
           {sides.map((side, i) => (
-            <BulletPointCard item={side} key={side.name}/>
+            <BulletPointCard
+              item={side}
+              key={side.name}
+            />
           ))}
         </TouchableOpacity>
       </View>
@@ -43,7 +47,18 @@ export default class CartCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+
+const CARD_HEIGHT = HEIGHT / 6;
+const CARD_WIDTH = WIDTH - 50;
+
+const spStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '100%'
+  },
   menuCard: {
     width: CARD_WIDTH,
     height: CARD_HEIGHT,

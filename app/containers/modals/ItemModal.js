@@ -1,14 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
+import { Banner, ScrollablePage, GenericButton, ItemPage } from '../../components';
+import { convertPrice, addToCart, modifySelection } from '../../helpers';
 
-import { Banner, ScrollablePage, CartButton, ItemPage } from '../../components';
-
-import { addToCart, modifySelection } from '../../helpers';
-
-const { width, height } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
 class Item extends React.Component {
   updateCart(selection) {
@@ -33,9 +30,9 @@ class Item extends React.Component {
   }
 
   render() {
-    const item = this.props.currentItem;
-    // console.log(item)
-    const { navigation, sides, drinks, cart, selection } = this.props;
+    let item = this.props.currentItem;
+    let { navigation, sides, cart, selection } = this.props;
+    let price = convertPrice(price);
     return (
       <View style={styles.container}>
         <Image
@@ -48,7 +45,6 @@ class Item extends React.Component {
         <ItemPage
           item={item}
           allSides={sides}
-          allDrinks={drinks}
           selection={selection}
           touchHandler={this.updateCurrentSelection.bind(this)}/>
         <Text style={[styles.text, {fontSize: 20, fontWeight: 'bold', textAlign: 'left'}]}>
@@ -58,7 +54,6 @@ class Item extends React.Component {
           main={item}
           cards={item.sides.order}
           allSides={sides}
-          allDrinks={drinks}
           cardStyle="RelatedItem"
           title="Sides"
           flex={3}
@@ -66,7 +61,11 @@ class Item extends React.Component {
           selection={selection}
           touchHandler={this.updateCurrentSelection.bind(this)}
         />
-        <CartButton price={selection.totalPrice} touchHandler={this.updateCart.bind(this)} selection={selection}/>
+        <GenericButton
+          title={`Add To Cart ${convertPrice(selection.totalPrice)}`}
+          touchHandler={() => {this.updateCart(selection)}}
+          color={'#36B325'}
+        />
       </View>
     )
   }
@@ -75,7 +74,7 @@ class Item extends React.Component {
 
 
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   updateMenu: (menu) => dispatch(actions.menuUpdate(menu)),
   updateCart: (cart) => dispatch(actions.updateCart(cart)),
   updateSelection: (selection) => dispatch(actions.updateSelection(selection))
@@ -85,13 +84,12 @@ export default connect((store) => {
   return {
     currentItem: store.currentItem,
     sides: store.sides,
-    drinks: store.drinks,
     cart: store.cart,
     selection: store.selection
   }
 }, mapDispatchToProps)(Item)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

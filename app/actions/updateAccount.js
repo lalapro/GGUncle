@@ -1,7 +1,3 @@
-import { database } from '../firebase';
-
-
-
 function actionCreator(account) {
   return {
     type: 'UPDATE_ACCOUNT',

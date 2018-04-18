@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get("window");
-
-import { convertPrice } from '../../helpers'
+let { width, height } = Dimensions.get("window");
+import { convertPrice } from '../../helpers';
 
 const CARD_HEIGHT = height / 6;
 const CARD_WIDTH = width - 50;
@@ -41,7 +40,7 @@ export default class MenuCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   menuCard: {
     padding: 3,
     width: CARD_WIDTH,

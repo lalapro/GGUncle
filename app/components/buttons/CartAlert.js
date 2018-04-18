@@ -1,40 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import genericStyles from './styles.js';
 import { convertPrice } from '../../helpers';
-
-const { width, height } = Dimensions.get("window");
 
 export default class CartAlert extends React.Component {
   render() {
-    const { cart, navigation } = this.props;
+    let { cart, navigation } = this.props;
     return (
-      <View style={{flex: 2, justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'lightblue', bottom: 0, width: "100%", height: 50}}>
+      <View style={spStyles.container}>
         <TouchableOpacity
-          style={{flex: 1, flexDirection: 'row', backgroundColor: '#36B325', width: '100%', justifyContent: 'space-around', alignItems: 'center'}}
+          style={spStyles.button}
           onPress={() => navigation.navigate('Cart')}
         >
-          <Text style={styles.textStyle}>{convertPrice(cart.totalPrice)}</Text>
-          <Text style={styles.textStyle}>View Cart</Text>
-          <Text style={styles.textStyle}>{cart.totalQuantity}</Text>
+          <Text style={genericStyles.text}>{convertPrice(cart.totalPrice)}</Text>
+          <Text style={genericStyles.text}>View Cart</Text>
+          <Text style={genericStyles.text}>{cart.totalQuantity}</Text>
         </TouchableOpacity>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  textStyle: {
-    fontSize:20,
-    color: '#ffffff',
-    textAlign: 'center'
-  },
-  buttonStyle: {
-    padding:10,
-    backgroundColor: '#32CD32',
-    borderRadius:5,
+let spStyles = StyleSheet.create({
+  container: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    height: 50,
+    bottom: 0,
     width: "100%",
-    flexDirection: 'column',
-    flex: 1
+  },
+  button: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#36B325',
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 });

@@ -1,23 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import genericStyles from './styles.js';
 
 export default class LandingPageButtons extends React.Component {
   render() {
-    const { touchHandler } = this.props;
+    let { touchHandler } = this.props;
     return (
-      <View style={{flex: 1, justifyContent: 'flex-end', backgroundColor: 'black', width: "100%"}}>
+      <View style={spStyles.container}>
         <TouchableOpacity
-          style={styles.buttonStyle}
+          style={spStyles.buttonStyle}
           onPress={() => {touchHandler('Login')}}
         >
-          <Text style={styles.textStyle}>Login</Text>
+          <Text style={genericStyles.textStyle}> Login </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.buttonStyle}
+          style={spStyles.buttonStyle}
           onPress={() => {touchHandler('SignUp')}}
         >
-          <Text style={styles.textStyle}>Sign Up</Text>
+          <Text style={genericStyles.textStyle}> Sign Up </Text>
         </TouchableOpacity>
       </View>
     )
@@ -25,7 +25,13 @@ export default class LandingPageButtons extends React.Component {
 }
 
 
-const styles = StyleSheet.create({
+let spStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'black',
+    width: "100%"
+  },
   buttonStyle: {
     padding:10,
     margin: 10,
@@ -33,10 +39,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#202646',
     borderRadius:5,
     minWidth: "80%"
-  },
-  textStyle: {
-    fontSize:20,
-    color: '#ffffff',
-    textAlign: 'center'
-  },
+  }
 });

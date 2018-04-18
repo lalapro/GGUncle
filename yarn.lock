@@ -173,9 +173,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/plugin-check-constants@^7.0.0-beta":
+"@babel/plugin-check-letants@^7.0.0-beta":
   version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-check-constants/-/plugin-check-constants-7.0.0-beta.38.tgz#bbda6306d45a4f097ccb416c0b52d6503f6502cf"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-check-letants/-/plugin-check-letants-7.0.0-beta.38.tgz#bbda6306d45a4f097ccb416c0b52d6503f6502cf"
 
 "@babel/plugin-external-helpers@^7.0.0-beta":
   version "7.0.0-beta.44"
@@ -1032,9 +1032,9 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-check-es2015-constants@^6.5.0, babel-plugin-check-es2015-constants@^6.8.0:
+babel-plugin-check-es2015-letants@^6.5.0, babel-plugin-check-es2015-letants@^6.8.0:
   version "6.22.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-check-es2015-constants/-/babel-plugin-check-es2015-constants-6.22.0.tgz#35157b101426fd2ffd3da3f75c7d1e91835bbf8a"
+  resolved "https://registry.yarnpkg.com/babel-plugin-check-es2015-letants/-/babel-plugin-check-es2015-letants-6.22.0.tgz#35157b101426fd2ffd3da3f75c7d1e91835bbf8a"
   dependencies:
     babel-runtime "^6.22.0"
 
@@ -1390,7 +1390,7 @@ babel-preset-fbjs@^2.1.2, babel-preset-fbjs@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/babel-preset-fbjs/-/babel-preset-fbjs-2.1.4.tgz#22f358e6654073acf61e47a052a777d7bccf03af"
   dependencies:
-    babel-plugin-check-es2015-constants "^6.8.0"
+    babel-plugin-check-es2015-letants "^6.8.0"
     babel-plugin-syntax-class-properties "^6.8.0"
     babel-plugin-syntax-flow "^6.8.0"
     babel-plugin-syntax-jsx "^6.8.0"
@@ -1436,7 +1436,7 @@ babel-preset-react-native@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-1.9.0.tgz#035fc06c65f4f2a02d0336a100b2da142f36dab1"
   dependencies:
-    babel-plugin-check-es2015-constants "^6.5.0"
+    babel-plugin-check-es2015-letants "^6.5.0"
     babel-plugin-react-transform "2.0.2"
     babel-plugin-syntax-async-functions "^6.5.0"
     babel-plugin-syntax-class-properties "^6.5.0"
@@ -1470,7 +1470,7 @@ babel-preset-react-native@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-4.0.0.tgz#3df80dd33a453888cdd33bdb87224d17a5d73959"
   dependencies:
-    babel-plugin-check-es2015-constants "^6.5.0"
+    babel-plugin-check-es2015-letants "^6.5.0"
     babel-plugin-react-transform "^3.0.0"
     babel-plugin-syntax-async-functions "^6.5.0"
     babel-plugin-syntax-class-properties "^6.5.0"
@@ -1730,9 +1730,9 @@ buffer-alloc@^1.1.0:
     buffer-alloc-unsafe "^0.1.0"
     buffer-fill "^0.1.0"
 
-buffer-equal-constant-time@1.0.1:
+buffer-equal-letant-time@1.0.1:
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+  resolved "https://registry.yarnpkg.com/buffer-equal-letant-time/-/buffer-equal-letant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
 
 buffer-fill@^0.1.0:
   version "0.1.1"
@@ -1825,7 +1825,7 @@ change-case@^2.3.0:
   resolved "https://registry.yarnpkg.com/change-case/-/change-case-2.3.1.tgz#2c4fde3f063bb41d00cd68e0d5a09db61cbe894f"
   dependencies:
     camel-case "^1.1.1"
-    constant-case "^1.1.0"
+    letant-case "^1.1.0"
     dot-case "^1.1.0"
     is-lower-case "^1.1.0"
     is-upper-case "^1.1.0"
@@ -2032,9 +2032,9 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
 
-constant-case@^1.1.0:
+letant-case@^1.1.0:
   version "1.1.2"
-  resolved "https://registry.yarnpkg.com/constant-case/-/constant-case-1.1.2.tgz#8ec2ca5ba343e00aa38dbf4e200fd5ac907efd63"
+  resolved "https://registry.yarnpkg.com/letant-case/-/letant-case-1.1.2.tgz#8ec2ca5ba343e00aa38dbf4e200fd5ac907efd63"
   dependencies:
     snake-case "^1.1.0"
     upper-case "^1.1.1"
@@ -4185,7 +4185,7 @@ jwa@^1.1.4:
   resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.1.5.tgz#a0552ce0220742cd52e153774a32905c30e756e5"
   dependencies:
     base64url "2.0.0"
-    buffer-equal-constant-time "1.0.1"
+    buffer-equal-letant-time "1.0.1"
     ecdsa-sig-formatter "1.0.9"
     safe-buffer "^5.0.1"
 
@@ -4597,7 +4597,7 @@ metro@^0.28.0:
     "@babel/core" "^7.0.0-beta"
     "@babel/generator" "^7.0.0-beta"
     "@babel/helper-remap-async-to-generator" "^7.0.0-beta"
-    "@babel/plugin-check-constants" "^7.0.0-beta"
+    "@babel/plugin-check-letants" "^7.0.0-beta"
     "@babel/plugin-external-helpers" "^7.0.0-beta"
     "@babel/plugin-proposal-class-properties" "^7.0.0-beta"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0-beta"

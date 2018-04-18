@@ -1,7 +1,3 @@
-import { database } from '../firebase';
-
-
-
 function actionCreator(stack) {
   return {
     type: 'UPDATE_NAVGIATION_STACK',

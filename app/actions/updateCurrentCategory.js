@@ -1,11 +1,12 @@
 import { database } from '../firebase';
 
+
 const MAINSREF = database.menuItems.child('digestData').child('mains');
 const CATSREF = database.menuItems.child('digestData').child('categories')
 
 
 async function getRelatedMains(id) {
-  let CURRENTCATEGORY = {};
+  const CURRENTCATEGORY = {};
   let mains = [];
   let categories = await CATSREF.once('value', snap => {
     if (snap.val()) {

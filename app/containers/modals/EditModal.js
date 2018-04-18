@@ -1,13 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { database } from '../../firebase';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-
 import { getQuantity, editCart, convertPrice } from '../../helpers';
-
-
-import { Banner, ScrollablePage, SubTotalPage, BulletPointCard, QuantityControl } from '../../components';
+import { Banner, ScrollablePage, SubTotalPage, BulletPointCard, QuantityControl, TextView } from '../../components';
 
 
 class EditModal extends React.Component {
@@ -31,9 +27,14 @@ class EditModal extends React.Component {
     let sides = item.sides ? Object.values(item.sides) : [];
     return (
       <View style={styles.container}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: '75%'}}>
+        <TextView
+          viewStyle={{flex: 1, justifyContent: 'center', alignItems: 'center', width: '75%'}}
+          textStyle={{fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center'}}
+          text={item.name}
+        />
+        {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', width: '75%'}}>
           <Text style={{fontSize: 18, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center'}}>{item.name}</Text>
-        </View>
+        </View> */}
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '85%'}}>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
             <Text style={{fontWeight: 'bold', fontSize: 18}}>{convertPrice(item.price * item.quantity)}</Text>
@@ -70,7 +71,7 @@ class EditModal extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+let mapDispatchToProps = (dispatch) => ({
   updateCart: (cart) => dispatch(actions.updateCart(cart)),
 })
 
@@ -80,7 +81,7 @@ export default connect((store) => {
   }
 }, mapDispatchToProps)(EditModal)
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-
 import { convertPrice, limitCharacters, getQuantity } from '../../helpers';
-
-import { RelatedItemCard } from '../cards';
 import { QuantityControl } from '../buttons';
 
-const { width, height } = Dimensions.get("window");
+let { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 5;
 const CARD_WIDTH = width / 2;
@@ -32,8 +29,8 @@ export default class ItemPage extends React.Component {
   }
 
   render() {
-    const { name, description, sides, drinks } = this.props.item;
-    const { allDrinks, allSides, touchHandler, item, selection } = this.props;
+    let { name, description, sides } = this.props.item;
+    let { allSides, touchHandler, item, selection } = this.props;
     return (
       <View style={{flex: 5, justifyContent: 'center', alignItems: 'center', width: "100%"}}>
 
@@ -69,7 +66,7 @@ export default class ItemPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   itemCard: {
     padding: 3,
     width: CARD_WIDTH,
