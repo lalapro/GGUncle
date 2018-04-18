@@ -1,11 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import TextView from '../TextView.js';
+import { database } from '../../firebase';
+import axios from 'axios';
 const { width, height } = Dimensions.get("window");
 import genericStyles from '../styles';
 
 
 export default class CategoryCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pic: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'
+    }
+  }
+  componentDidMount() {
+    database.pics.child(this.props.category.id).once('value', snap => {
+      if (snap.val()) {
+        this.setState({
+          pic: snap.val()
+        })
+      }
+    })
+  }
+
   render() {
     let category = this.props.category;
 
@@ -15,7 +33,7 @@ export default class CategoryCard extends React.Component {
           <Image
             style={spStyles.cardImage}
             resizeMode="cover"
-            source={{uri: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'}}
+            source={{uri: this.state.pic}}
           />
           <TextView
             viewStyle={[genericStyles.flexContainer, { position: 'absolute'}]}
@@ -45,16 +63,19 @@ const spStyles = StyleSheet.create({
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   cardImage: {
     width: "100%",
     height: "100%",
-    opacity: 0.8,
+    // backgroundColor: 'rgba(0,0,0,.6)',
+    shadowOpacity: 1,
     alignSelf: 'center'
   },
   text: {
     position: 'absolute',
-    color: 'white'
+    color: 'white',
+    fontWeight: '900',
+    textShadowColor: 'black'
   },
 });

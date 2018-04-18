@@ -9,9 +9,7 @@ import genericStyles from '../styles';
 let { width, height } = Dimensions.get("window");
 
 export default class ItemPage extends React.Component {
-
   componentDidMount() {
-    // if item isn't currently selected, add it into the selection
     if (this.props.selection.totalPrice === 0) {
       this.updateSelection(this.props.item, 'Add')
     }
