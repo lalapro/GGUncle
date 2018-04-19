@@ -3,27 +3,12 @@ import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'rea
 import TextView from '../TextView.js';
 import { database } from '../../firebase';
 import axios from 'axios';
+import stockPhotos from './stockPhotos.js';
 const { width, height } = Dimensions.get("window");
 import genericStyles from '../styles';
 
 
 export default class CategoryCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pic: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/117944.jpg'
-    }
-  }
-  componentDidMount() {
-    database.pics.child(this.props.category.id).once('value', snap => {
-      if (snap.val()) {
-        this.setState({
-          pic: snap.val()
-        })
-      }
-    })
-  }
-
   render() {
     let category = this.props.category;
 
@@ -33,7 +18,7 @@ export default class CategoryCard extends React.Component {
           <Image
             style={spStyles.cardImage}
             resizeMode="cover"
-            source={{uri: this.state.pic}}
+            source={stockPhotos[category.name]}
           />
           <TextView
             viewStyle={[genericStyles.flexContainer, { position: 'absolute'}]}
@@ -68,7 +53,6 @@ const spStyles = StyleSheet.create({
   cardImage: {
     width: "100%",
     height: "100%",
-    // backgroundColor: 'rgba(0,0,0,.6)',
     shadowOpacity: 1,
     alignSelf: 'center'
   },
